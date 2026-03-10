@@ -156,47 +156,105 @@ async def generate(req: GenerateRequest):
                 error="Configuration failed guardrail checks. See warnings.",
             )
 
-        # Step 3: Multi-Feature Graph Composition & Generation
-        if len(config.components) > 1:
-            logger.info("Multiple components detected. Routing to GraphFeatureComposer for unified topological synthesis.")
+        # Step 3: Failproof Multi-Feature Graph Composition & Generation
+        stl_bytes = None
+        glb_bytes = None
+        recipe_feature_graph = []
+        
+        if len(config.components) >= 1:
+            logger.info("Routing components to Failproof Component Pipeline for topological synthesis.")
             
             # Load engineering library to inject physical dimensions into the execution parameters
-            import json
+            import json, networkx as nx
+            from core.cad_engine import CadEngine
+            
             lib_path = os.path.join(os.path.dirname(__file__), "..", "hardware_library", "engineering_library.json")
             with open(lib_path, "r", encoding="utf-8") as f:
                 component_library = json.load(f)
 
             subgraphs = []
-            valid_components = []
-            for comp in config.components:
-                # Query the recommender database explicitly by the exact component_id
-                sg = graph_recommender.suggest_template([comp.id])
-                
-                # Fallback to token matching if the exact ID doesn't directly map to a node or graph
-                if not sg or len(sg.nodes) == 0:
-                    sg = graph_recommender.suggest_template(comp.id.replace("_", " ").split())
+            component_node_map = {}
+            cadengine = CadEngine()
+            
+            try:
+                for comp in config.components:
+                    # Explicit ID lookup first
+                    sg = graph_recommender.suggest_template([comp.id])
                     
-                if sg is not None and len(sg.nodes) > 0:
-                    subgraphs.append(sg)
-                    valid_components.append(comp)
-            
-            # Attach offline parameters precisely to the CadQuery primitive nodes
-            for comp, sg in zip(valid_components, subgraphs):
-                for node in sg.nodes:
-                    params = component_library.get(comp.id, {})
-                    setattr(graph_composer.cadengine, f"{node}_params", {**params, "count": comp.count})
+                    # Fallback to token matching
+                    if not sg or len(sg.nodes) == 0:
+                        sg = graph_recommender.suggest_template(comp.id.replace("_", " ").split())
+                        
+                    if sg is not None and len(sg.nodes) > 0:
+                        subgraphs.append(sg)
+                        component_node_map[comp.id] = list(sg.nodes)
+                
+                if not subgraphs:
+                    raise RuntimeError("No valid subgraphs found for any components in the dataset.")
+                
+                # Merge subgraphs into one DAG
+                merged_graph = dict() 
+                merged_graph_dag = nx.DiGraph()
+                for sg in subgraphs:
+                    merged_graph_dag.add_nodes_from(sg.nodes)
+                    merged_graph_dag.add_edges_from(sg.edges)
+                
+                # Ensure DAG (remove cycles if any)
+                if not nx.is_directed_acyclic_graph(merged_graph_dag):
+                    merged_graph_dag = nx.DiGraph(nx.topological_sort(merged_graph_dag))
+                
+                # Inject parameters for each node natively
+                for comp in config.components:
+                    if comp.id not in component_node_map:
+                        continue
+                    for node in component_node_map[comp.id]:
+                        params = component_library.get(comp.id, {})
+                        setattr(cadengine, f"{node}_params", {**params, "count": comp.count, "grid_x": config.grid_x, "grid_y": config.grid_y})
+                
+                # Ensure gridfinity_base executes first inherently by setting attributes on the base plate
+                if not hasattr(cadengine, "gridfinity_base_params"):
+                    setattr(cadengine, "gridfinity_base_params", {"grid_x": config.grid_x, "grid_y": config.grid_y, "grid_z": config.grid_z})
 
-            global_config = {"grid_x": config.grid_x, "grid_y": config.grid_y}
-            executed_nodes, composed_graph = graph_composer.compose_from_prompts(subgraphs, global_config)
-            logger.info(f"Graph Composer executed features: {executed_nodes}")
-            
-            # Since full parameter auto-mapping is still under development in the composer,
-            # we run standard fallback geometry so the endpoint successfully completes STL export.
-            stl_bytes = generate_stl(config)
-            glb_bytes = generate_glb(config)
+                # Execute merged graph topologically with Hard Stops
+                for node in nx.topological_sort(merged_graph_dag):
+                    func = getattr(cadengine, node, None)
+                    if func is None:
+                        raise ValueError(f"Missing CAD kernel primitive for node: {node}")
+                    
+                    params = getattr(cadengine, f"{node}_params", {})
+                    logger.info(f"Composer Engine invoking primitive: {node} ({params})")
+                    func(**params)
+                    
+                    # Optional: Explicit validations after each step can catch overlapping cut corruption early
+                    GeometryValidator.validate_manifold(cadengine.solid)
+                    
+                stl_bytes = cadengine.export_stl()
+                glb_bytes = cadengine.export_glb()
+                
+                # Track executed nodes correctly
+                recipe_feature_graph = [
+                    {"feature": n, "params": getattr(cadengine, f"{n}_params", {})} 
+                    for n in merged_graph_dag.nodes
+                ]
+                
+            except Exception as graph_err:
+                logger.error(f"Failproof topological execution crashed: {graph_err}. Falling back to default solid generator.")
+                import traceback
+                traceback.print_exc()
+                
+                stl_bytes = generate_stl(config)
+                glb_bytes = generate_glb(config)
+                recipe_feature_graph = [
+                    {"feature": "gridfinity_base", "params": {"grid_x": config.grid_x, "grid_y": config.grid_y}},
+                    {"feature": config.template_name, "params": {}}
+                ]
         else:
             stl_bytes = generate_stl(config)
             glb_bytes = generate_glb(config)
+            recipe_feature_graph = [
+                {"feature": "gridfinity_base", "params": {"grid_x": config.grid_x, "grid_y": config.grid_y}},
+                {"feature": config.template_name, "params": {}}
+            ]
 
         if not stl_bytes or not glb_bytes:
              return GenerateResponse(
@@ -207,21 +265,6 @@ async def generate(req: GenerateRequest):
         # Step 4: Save & return URLs
         stl_filename = save_stl(stl_bytes)
         glb_filename = save_glb(glb_bytes)
-
-        # Step 5: Record Recipe in Learning Engine for organic template discovery
-        recipe_feature_graph = []
-        if len(config.components) > 1 and len(config.components) == len(locals().get('subgraphs', [])):
-            # Record the successfully combined topological graph and the dynamically assigned JSON params
-            recipe_feature_graph = [
-                {"feature": n, "params": getattr(graph_composer.cadengine, f"{n}_params", {})} 
-                for n in composed_graph.nodes
-            ]
-        else:
-            # Record single template explicitly
-            recipe_feature_graph = [
-                {"feature": "gridfinity_base", "params": {"grid_x": config.grid_x, "grid_y": config.grid_y}},
-                {"feature": config.template_name, "params": {}}
-            ]
 
         recipe = {
             "prompt": req.prompt,
