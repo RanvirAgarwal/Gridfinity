@@ -10,12 +10,12 @@ from core.cadquery_engine import _cq_build_bin, generate_stl
 
 # Simulate the configuration for a test tube rack
 config = BinConfig(
-    grid_x=1,
-    grid_y=1,
-    grid_z=3,
-    template_name="mx_switch_tester",
-    item_count=18,
-    component_id="choc_switch"
+    grid_x=2,
+    grid_y=3,
+    grid_z=4,
+    template_name="test_tube_rack_16mm",
+    item_count=16,
+    component_id="test_tube_16mm"
 )
 
 try:

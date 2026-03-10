@@ -20,6 +20,9 @@ from core.schemas import BinConfig
 import json
 
 # Features & Geometry
+from core.constraint_solver import ConstraintSolver
+from core.geometry_validator import GeometryValidator
+from core.kernel_primitives import KernelPrimitives
 from features.base import build_gridfinity_base, build_walls
 from features.pcb_mount import build_pcb_mount
 from core.feature_compiler import FeatureCompiler
@@ -61,29 +64,21 @@ def _cq_build_bin(raw_config: BinConfig) -> cq.Workplane:
         grid_x = max(1, min(config.grid_x, 3))
         grid_y = max(1, min(config.grid_y, 3)) # Cap hex mesh gen logic loop limits 
     elif template_name == "mx_switch_tester":
-        import math
         slots = item_count if item_count and item_count > 0 else 16
         pitch = comp_data.get("pitch", 19.05) if comp_data else 19.05
-        cols = math.ceil(math.sqrt(slots))
-        rows = math.ceil(slots / cols)
-        min_grid_x = math.ceil((cols * pitch + 10) / 42.0)
-        min_grid_y = math.ceil((rows * pitch + 10) / 42.0)
-        grid_x = max(int(min_grid_x), min(config.grid_x, 4))
-        grid_y = max(int(min_grid_y), min(config.grid_y, 4))
+        auto_grid_x, auto_grid_y = ConstraintSolver.compute_grid_dimensions(slots, pitch)
+        grid_x = max(auto_grid_x, min(config.grid_x, 4))
+        grid_y = max(auto_grid_y, min(config.grid_y, 4))
     elif template_name == "angled_ring_display":
         grid_x = max(1, min(config.grid_x, 4))
         grid_y = max(1, min(config.grid_y, 4))
     elif template_name == "test_tube_rack_16mm":
-        import math
         slots = item_count if item_count and item_count > 0 else 10
         diameter = comp_data.get("diameter", 16.0) if comp_data else 16.0
-        spacing = max(20.0, diameter + 4.0)
-        cols = math.ceil(math.sqrt(slots))
-        rows = math.ceil(slots / cols)
-        min_grid_x = math.ceil((cols * spacing + 10) / 42.0)
-        min_grid_y = math.ceil((rows * spacing + 10) / 42.0)
-        grid_x = max(int(min_grid_x), min(config.grid_x, 4))
-        grid_y = max(int(min_grid_y), min(config.grid_y, 4))
+        pitch = ConstraintSolver.calculate_pitch(diameter, 4.0)
+        auto_grid_x, auto_grid_y = ConstraintSolver.compute_grid_dimensions(slots, pitch)
+        grid_x = max(auto_grid_x, min(config.grid_x, 4))
+        grid_y = max(auto_grid_y, min(config.grid_y, 4))
     else:
         grid_x = max(1, min(config.grid_x, 6))
         grid_y = max(1, min(config.grid_y, 6))
@@ -101,28 +96,23 @@ def _cq_build_bin(raw_config: BinConfig) -> cq.Workplane:
 
     elif template_name == "test_tube_rack_16mm":
         solid = build_walls(base_plate, grid_x, grid_y, grid_z, is_solid=True, wall_thickness=wall_thickness)
-        import math
         slots = item_count if item_count and item_count > 0 else 10
         diameter = comp_data.get("diameter", 16.0) if comp_data else 16.0
-        pitch = max(20.0, diameter + 4.0)
-        cols = math.ceil(math.sqrt(slots))
-        rows = math.ceil(slots / cols)
+        pitch = ConstraintSolver.calculate_pitch(diameter, 4.0)
+        
+        rows, cols, start_x, start_y = ConstraintSolver.calculate_array_bounds(slots, pitch)
         
         pts = []
         placed = 0
-        start_x = -((cols - 1) * pitch) / 2.0
-        start_y = ((rows - 1) * pitch) / 2.0
-        
         for r in range(rows):
             for c in range(cols):
-                if placed >= slots:
-                    break
+                if placed >= slots: break
                 pts.append((start_x + c * pitch, start_y - r * pitch))
                 placed += 1
         
-        # Add 1.0mm tolerance to the real diameter, and push 3D cuts
-        hole_rad = (diameter + 1.0) / 2.0
-        solid = solid.faces(">Z").workplane(centerOption="CenterOfMass").pushPoints(pts).circle(hole_rad).cutBlind(-(wall_height - 2.0))
+        hole_diam = ConstraintSolver.calculate_hole_diameter(diameter, is_press_fit=False)
+        GeometryValidator.validate_points_in_bounds(pts, hole_diam / 2.0, grid_x, grid_y)
+        solid = KernelPrimitives.circular_array_cut(solid, pts, hole_diam, (wall_height - 2.0))
 
     elif template_name == "arduino_uno_tray":
         solid = build_walls(base_plate, grid_x, grid_y, grid_z, is_solid=False, wall_thickness=wall_thickness)
@@ -160,82 +150,36 @@ def _cq_build_bin(raw_config: BinConfig) -> cq.Workplane:
         solid = solid.cut(usb_cut)
 
     elif template_name == "mx_switch_tester":
-        outer_w = grid_x * 42.0 - 0.5
-        outer_l = grid_y * 42.0 - 0.5
-        
-        block = (
-            cq.Workplane("XY")
-            .workplane(offset=BASE_HEIGHT)
-            .rect(outer_w, outer_l)
-            .extrude(wall_height)
-        )
-        # Boolean wedge cut to create the 15-degree slope safely
-        cutter = (
-            cq.Workplane("XY")
-            .workplane(offset=BASE_HEIGHT + wall_height) 
-            .transformed(rotate=(-15, 0, 0))
-            .rect(outer_w * 3, outer_l * 3)
-            .extrude(wall_height + 20)
-        )
-        block = block.cut(cutter)
-        solid = base_plate.union(block)
+        solid = KernelPrimitives.create_solid_block(base_plate, grid_x, grid_y, grid_z)
+        solid = KernelPrimitives.apply_angled_cut(solid, grid_x, grid_y, grid_z, 15.0)
 
-        import math
         slots = item_count if item_count and item_count > 0 else 16
         pitch = comp_data.get("pitch", 19.05) if comp_data else 19.05
         body_size = comp_data.get("body", 14.0) if comp_data else 14.0
-        cols = math.ceil(math.sqrt(slots))
-        rows = math.ceil(slots / cols)
+        
+        rows, cols, start_x, start_y = ConstraintSolver.calculate_array_bounds(slots, pitch)
 
         try:
             pts = []
             placed = 0
-            start_x = -((cols - 1) * pitch) / 2.0
-            start_y = ((rows - 1) * pitch) / 2.0
-            
             for r in range(rows):
                 for c in range(cols):
-                    if placed >= slots:
-                        break
+                    if placed >= slots: break
                     pts.append((start_x + c * pitch, start_y - r * pitch))
                     placed += 1
-                    
-            solid = solid.faces(">Z").workplane(centerOption="CenterOfMass").pushPoints(pts).rect(body_size, body_size).cutBlind(-6)
+            
+            GeometryValidator.validate_points_in_bounds(pts, body_size / 2.0, grid_x, grid_y)
+            solid = KernelPrimitives.rectangular_array_cut(solid, pts, body_size, body_size, 6.0)
         except Exception as e:
             logger.error(f"Kernel crash during array cut for mx_switch_tester: {e}")
-            # Fallback: keep the angled wedge but skip the boolean holes if the footprint exceeds the face  
 
     elif template_name == "metric_screw_organizer":
         solid = build_walls(base_plate, grid_x, grid_y, grid_z, is_solid=False, wall_thickness=wall_thickness)
-        length = grid_y * 42.0 - 4.0
-        divider = (
-            cq.Workplane("XY")
-            .workplane(offset=BASE_HEIGHT)
-            .rect(2.0, length)
-            .extrude(wall_height - BASE_HEIGHT)
-        )
-        solid = solid.union(divider)
+        solid = KernelPrimitives.add_divider_wall(solid, grid_y, grid_z)
 
     elif template_name == "angled_ring_display":
-        outer_w = grid_x * 42.0 - 0.5
-        outer_l = grid_y * 42.0 - 0.5
-        
-        block = (
-            cq.Workplane("XY")
-            .workplane(offset=BASE_HEIGHT)
-            .rect(outer_w, outer_l)
-            .extrude(wall_height)
-        )
-        # Boolean wedge cut for 20-degree slope
-        cutter = (
-            cq.Workplane("XY")
-            .workplane(offset=BASE_HEIGHT + wall_height) 
-            .transformed(rotate=(-20, 0, 0))
-            .rect(outer_w * 3, outer_l * 3)
-            .extrude(wall_height + 20)
-        )
-        block = block.cut(cutter)
-        solid = base_plate.union(block)
+        solid = KernelPrimitives.create_solid_block(base_plate, grid_x, grid_y, grid_z)
+        solid = KernelPrimitives.apply_angled_cut(solid, grid_x, grid_y, grid_z, 20.0)
         
         count_y = grid_y * 3
         
@@ -289,6 +233,12 @@ def generate_stl(config: BinConfig) -> Optional[bytes]:
     logger.info(f"Generating CAD mesh from JSON definition...")
     try:
         model = _cq_build_bin(config)
+        
+        # Validates manifold integrity immediately before compilation logic
+        if not GeometryValidator.validate_manifold(model):
+            logger.error("Rejecting export: Topologically invalid or disjoint object.")
+            return None
+            
         with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as tmp:
             tmp_path = tmp.name
         
