@@ -1,0 +1,21 @@
+{
+  "prompt": "Build a Raspberry Pi tray with 4 SD card slots and 12 test tube holder",
+  "component": "sd_card",
+  "count": 4,
+  "template": "basic_storage_bin",
+  "feature_graph": [
+    {
+      "feature": "gridfinity_base",
+      "params": {
+        "grid_x": 12,
+        "grid_y": 4
+      }
+    },
+    {
+      "feature": "basic_storage_bin",
+      "params": {}
+    }
+  ],
+  "status": "valid",
+  "timestamp": "2026-03-10T01-17-34-623558"
+}

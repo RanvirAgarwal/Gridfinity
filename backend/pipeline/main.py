@@ -171,6 +171,11 @@ async def generate(req: GenerateRequest):
             for comp in config.components:
                 # Query the recommender database explicitly by the exact component_id
                 sg = graph_recommender.suggest_template([comp.id])
+                
+                # Fallback to token matching if the exact ID doesn't directly map to a node or graph
+                if not sg or len(sg.nodes) == 0:
+                    sg = graph_recommender.suggest_template(comp.id.replace("_", " ").split())
+                    
                 if sg is not None and len(sg.nodes) > 0:
                     subgraphs.append(sg)
                     valid_components.append(comp)
@@ -206,8 +211,11 @@ async def generate(req: GenerateRequest):
         # Step 5: Record Recipe in Learning Engine for organic template discovery
         recipe_feature_graph = []
         if len(config.components) > 1 and len(config.components) == len(locals().get('subgraphs', [])):
-            # Record the successfully combined topological graph
-            recipe_feature_graph = [{"feature": n, "params": {}} for n in composed_graph.nodes]
+            # Record the successfully combined topological graph and the dynamically assigned JSON params
+            recipe_feature_graph = [
+                {"feature": n, "params": getattr(graph_composer.cadengine, f"{n}_params", {})} 
+                for n in composed_graph.nodes
+            ]
         else:
             # Record single template explicitly
             recipe_feature_graph = [
@@ -217,6 +225,7 @@ async def generate(req: GenerateRequest):
 
         recipe = {
             "prompt": req.prompt,
+            "components": [c.model_dump() for c in config.components] if getattr(config, "components", []) else [],
             "component": config.component_id or "multi_component",
             "count": config.item_count,
             "template": config.template_name,

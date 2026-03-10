@@ -1,0 +1,21 @@
+{
+  "prompt": "4 SD card slots tray",
+  "component": "sd_card",
+  "count": 4,
+  "template": "basic_storage_bin",
+  "feature_graph": [
+    {
+      "feature": "gridfinity_base",
+      "params": {
+        "grid_x": 2,
+        "grid_y": 2
+      }
+    },
+    {
+      "feature": "basic_storage_bin",
+      "params": {}
+    }
+  ],
+  "status": "valid",
+  "timestamp": "2026-03-10T01-16-59-660207"
+}

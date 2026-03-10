@@ -1,0 +1,8 @@
+{
+  "gridfinity_base_basic_storage_bin": {
+    "feature_graph": [
+      "gridfinity_base",
+      "basic_storage_bin"
+    ]
+  }
+}
