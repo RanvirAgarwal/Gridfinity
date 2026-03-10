@@ -13,7 +13,9 @@ config = BinConfig(
     grid_x=1,
     grid_y=1,
     grid_z=3,
-    template_name="mx_switch_tester"
+    template_name="mx_switch_tester",
+    item_count=18,
+    component_id="choc_switch"
 )
 
 try:

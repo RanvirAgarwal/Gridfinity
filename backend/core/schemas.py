@@ -59,6 +59,16 @@ class BinConfig(BaseModel):
         description="The explicit predefined template to use for generation."
     )
     
+    item_count: Optional[int] = Field(
+        default=None,
+        description="Exact number of items/slots requested (e.g. 16 switches)"
+    )
+    
+    component_id: Optional[str] = Field(
+        default=None,
+        description="The specific ID from engineering_library.json for dimensions"
+    )
+    
     # Legacy fields kept for frontend compatibility but ignored by backend geometry engine
     structure: Optional[str] = Field(default="hollow_bin", description="Either 'solid_block' or 'hollow_bin'")
     operations: Optional[list] = Field(default_factory=list, description="Array of Boolean actions (ignored in v2)")

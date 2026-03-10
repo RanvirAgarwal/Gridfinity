@@ -112,7 +112,9 @@ async def generate(req: GenerateRequest):
             grid_y=ar.grid_y or 1,
             grid_z=3, # standard tray height baseline
             label=req.prompt[:60],
-            template_name=getattr(ar, "template_name", "basic_storage_bin")
+            template_name=getattr(ar, "template_name", "basic_storage_bin"),
+            item_count=getattr(ar, "item_count", None),
+            component_id=getattr(ar, "component_id", None)
         )
         logger.info(f"Config: {config.grid_x}x{config.grid_y}x{config.grid_z}, Template: {config.template_name}")
 

@@ -17,6 +17,7 @@ from typing import Optional
 from core.constraint_engine import ConstraintEngine
 from components import database
 from core.schemas import BinConfig
+import json
 
 # Features & Geometry
 from features.base import build_gridfinity_base, build_walls
@@ -38,6 +39,21 @@ def _cq_build_bin(raw_config: BinConfig) -> cq.Workplane:
 
     template_name = getattr(config, "template_name", "basic_storage_bin")
     
+    item_count = getattr(config, "item_count", None)
+    component_id = getattr(config, "component_id", None)
+    
+    # Load physical component dataset dynamically
+    comp_data = {}
+    if component_id:
+        lib_path = os.path.join(os.path.dirname(__file__), "..", "hardware_library", "engineering_library.json")
+        try:
+            with open(lib_path, "r", encoding="utf-8") as f:
+                lib = json.load(f)
+                comp_data = lib.get(component_id, {})
+                logger.info(f"Loaded component traits for '{component_id}': {comp_data}")
+        except Exception as e:
+            logger.error(f"Failed to load component library data internally: {e}")
+    
     # Enforce strict geometric constraints per template to prevent kernel timeouts & disjoint rendering
     if template_name == "arduino_uno_tray":
         grid_x, grid_y = 2, 2 # Uno board size is fixed; lock grid explicitly.
@@ -45,11 +61,29 @@ def _cq_build_bin(raw_config: BinConfig) -> cq.Workplane:
         grid_x = max(1, min(config.grid_x, 3))
         grid_y = max(1, min(config.grid_y, 3)) # Cap hex mesh gen logic loop limits 
     elif template_name == "mx_switch_tester":
-        grid_x = max(2, min(config.grid_x, 4))
-        grid_y = max(2, min(config.grid_y, 4))
+        import math
+        slots = item_count if item_count and item_count > 0 else 16
+        pitch = comp_data.get("pitch", 19.05) if comp_data else 19.05
+        cols = math.ceil(math.sqrt(slots))
+        rows = math.ceil(slots / cols)
+        min_grid_x = math.ceil((cols * pitch + 10) / 42.0)
+        min_grid_y = math.ceil((rows * pitch + 10) / 42.0)
+        grid_x = max(int(min_grid_x), min(config.grid_x, 4))
+        grid_y = max(int(min_grid_y), min(config.grid_y, 4))
     elif template_name == "angled_ring_display":
         grid_x = max(1, min(config.grid_x, 4))
         grid_y = max(1, min(config.grid_y, 4))
+    elif template_name == "test_tube_rack_16mm":
+        import math
+        slots = item_count if item_count and item_count > 0 else 10
+        diameter = comp_data.get("diameter", 16.0) if comp_data else 16.0
+        spacing = max(20.0, diameter + 4.0)
+        cols = math.ceil(math.sqrt(slots))
+        rows = math.ceil(slots / cols)
+        min_grid_x = math.ceil((cols * spacing + 10) / 42.0)
+        min_grid_y = math.ceil((rows * spacing + 10) / 42.0)
+        grid_x = max(int(min_grid_x), min(config.grid_x, 4))
+        grid_y = max(int(min_grid_y), min(config.grid_y, 4))
     else:
         grid_x = max(1, min(config.grid_x, 6))
         grid_y = max(1, min(config.grid_y, 6))
@@ -67,9 +101,28 @@ def _cq_build_bin(raw_config: BinConfig) -> cq.Workplane:
 
     elif template_name == "test_tube_rack_16mm":
         solid = build_walls(base_plate, grid_x, grid_y, grid_z, is_solid=True, wall_thickness=wall_thickness)
-        count_x = grid_x * 2
-        count_y = grid_y * 2
-        solid = solid.faces(">Z").workplane(centerOption="CenterOfMass").rarray(20, 20, count_x, count_y).circle(8.5).cutBlind(-(wall_height - 2.0))
+        import math
+        slots = item_count if item_count and item_count > 0 else 10
+        diameter = comp_data.get("diameter", 16.0) if comp_data else 16.0
+        pitch = max(20.0, diameter + 4.0)
+        cols = math.ceil(math.sqrt(slots))
+        rows = math.ceil(slots / cols)
+        
+        pts = []
+        placed = 0
+        start_x = -((cols - 1) * pitch) / 2.0
+        start_y = ((rows - 1) * pitch) / 2.0
+        
+        for r in range(rows):
+            for c in range(cols):
+                if placed >= slots:
+                    break
+                pts.append((start_x + c * pitch, start_y - r * pitch))
+                placed += 1
+        
+        # Add 1.0mm tolerance to the real diameter, and push 3D cuts
+        hole_rad = (diameter + 1.0) / 2.0
+        solid = solid.faces(">Z").workplane(centerOption="CenterOfMass").pushPoints(pts).circle(hole_rad).cutBlind(-(wall_height - 2.0))
 
     elif template_name == "arduino_uno_tray":
         solid = build_walls(base_plate, grid_x, grid_y, grid_z, is_solid=False, wall_thickness=wall_thickness)
@@ -127,10 +180,27 @@ def _cq_build_bin(raw_config: BinConfig) -> cq.Workplane:
         block = block.cut(cutter)
         solid = base_plate.union(block)
 
-        count_x = grid_x * 2
-        count_y = grid_y * 2
+        import math
+        slots = item_count if item_count and item_count > 0 else 16
+        pitch = comp_data.get("pitch", 19.05) if comp_data else 19.05
+        body_size = comp_data.get("body", 14.0) if comp_data else 14.0
+        cols = math.ceil(math.sqrt(slots))
+        rows = math.ceil(slots / cols)
+
         try:
-            solid = solid.faces(">Z").workplane(centerOption="CenterOfMass").rarray(19.05, 19.05, count_x, count_y).rect(14, 14).cutBlind(-6)
+            pts = []
+            placed = 0
+            start_x = -((cols - 1) * pitch) / 2.0
+            start_y = ((rows - 1) * pitch) / 2.0
+            
+            for r in range(rows):
+                for c in range(cols):
+                    if placed >= slots:
+                        break
+                    pts.append((start_x + c * pitch, start_y - r * pitch))
+                    placed += 1
+                    
+            solid = solid.faces(">Z").workplane(centerOption="CenterOfMass").pushPoints(pts).rect(body_size, body_size).cutBlind(-6)
         except Exception as e:
             logger.error(f"Kernel crash during array cut for mx_switch_tester: {e}")
             # Fallback: keep the angled wedge but skip the boolean holes if the footprint exceeds the face  
@@ -168,8 +238,13 @@ def _cq_build_bin(raw_config: BinConfig) -> cq.Workplane:
         solid = base_plate.union(block)
         
         count_y = grid_y * 3
+        
+        # Use simple library diameter proxy if jewelry_ring matched
+        ring_diam = comp_data.get("diameter", 22.0) if comp_data else 22.0
+        slot_width = ring_diam + 3.0
+        
         try:
-            solid = solid.faces(">Z").workplane(centerOption="CenterOfMass").rarray(30, 10, grid_x, count_y).rect(25, 3).cutBlind(-15.0)
+            solid = solid.faces(">Z").workplane(centerOption="CenterOfMass").rarray(30, 10, grid_x, count_y).rect(slot_width, 3).cutBlind(-15.0)
         except Exception as e:
             logger.error(f"Kernel crash during array cut for angled_ring_display: {e}")
 

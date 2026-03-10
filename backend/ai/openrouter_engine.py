@@ -30,15 +30,24 @@ class AdvancedGenerateResponse(BaseModel):
     grid_y: Optional[int] = None
     base_height: Optional[int] = None
     template_name: Optional[str] = None
+    item_count: Optional[int] = None
+    component_id: Optional[str] = None
     operations: Optional[list] = None
     error: Optional[str] = None
     raw_response: Optional[str] = None
 
-# ── System Prompt ────────────────────────────────────────────────────────────
+SYSTEM_PROMPT = """You are a CAD generation system using CadQuery for the Gridfinity architecture.
+Your ONLY job is to read the user's prompt, select the most appropriate hardcoded template, and output the required grid parameters.
 
-SYSTEM_PROMPT = """You are an intent classification AI for a Gridfinity CAD generator.
-Your ONLY job is to read the user's prompt and select the most appropriate hardcoded template. 
-DO NOT guess dimensions or generate any custom structures.
+CRITICAL ENGINEERING CONSTANTS:
+You MUST only use component dimensions from the provided component library.
+Never guess measurements.
+All geometry must be in millimeters.
+Gridfinity base unit = 42mm.
+Gridfinity height unit = 7mm.
+Minimum wall thickness = 2mm.
+Clearance for inserts = 0.4mm.
+All arrays must exactly match the requested quantity.
 
 The ONLY allowed values for 'template_name' are:
 - "basic_storage_bin"
@@ -50,13 +59,17 @@ The ONLY allowed values for 'template_name' are:
 - "hex_mesh_sterilization_tray"
 
 If the user's request doesn't clearly match a specific template, fallback to "basic_storage_bin".
+If the user specifies an exact quantity of items (e.g. "16 switches", "10 test tubes", "hold 5 sd cards"), set 'item_count' to that integer.
+If the component exists in the COMPONENT LIBRARY DATA provided below, set 'component_id' to its exact name.
 
 OUTPUT SPECIFICATION:
-You MUST output EXACTLY one JSON object containing ONLY grid_x, grid_y, and template_name.
+You MUST output EXACTLY one JSON object containing ONLY grid_x, grid_y, template_name, item_count, and component_id.
 {
   "grid_x": int,
   "grid_y": int,
-  "template_name": str
+  "template_name": str,
+  "item_count": int, // optional, omit if no quantity specified
+  "component_id": str // optional, omit if no matching component
 }
 """
 
@@ -74,10 +87,42 @@ async def generate_advanced(req: AdvancedGenerateRequest):
     
     try:
         logger.info(f"Attempting inference with local model: {LOCAL_MODEL}")
+        # Load and intelligently filter component library dynamically
+        lib_path = os.path.join(os.path.dirname(__file__), "..", "hardware_library", "engineering_library.json")
+        try:
+            with open(lib_path, "r", encoding="utf-8") as f:
+                full_lib = json.load(f)
+                
+            # Filter the massive 500+ component library to avoid overloading the LLM context window
+            prompt_lower = req.prompt.lower()
+            filtered_lib = {}
+            for comp_id, comp_data in full_lib.items():
+                category = comp_data.get("category", "").lower()
+                # Simple keyword matching heuristic
+                if (comp_id.replace("_", " ") in prompt_lower or 
+                    category.replace("_", " ") in prompt_lower or
+                    "board" in prompt_lower and category == "electronics_board" or
+                    "switch" in prompt_lower and category == "keyboard_switch" or
+                    "screw" in prompt_lower and category == "fastener"):
+                    filtered_lib[comp_id] = comp_data
+            
+            # If extremely sparse, fallback to a small generic selection to prevent empty library
+            if not filtered_lib and len(full_lib) > 0:
+                 # Provide 10 generic samples from the dictionary
+                 filtered_lib = dict(list(full_lib.items())[:10])
+                 
+            lib_data = json.dumps(filtered_lib, indent=2)
+            logger.info(f"Dynamically filtered {len(full_lib)} library components down to {len(filtered_lib)} relevant subsets for prompt inclusion.")
+        except Exception as e:
+            logger.error(f"Failed to load engineering library: {e}")
+            lib_data = "No custom library loaded."
+
+        full_prompt = SYSTEM_PROMPT + f"\n\nCOMPONENT LIBRARY DATA:\n{lib_data}"
+
         response = await client.chat.completions.create(
             model=LOCAL_MODEL,
             messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": full_prompt},
                 {"role": "user", "content": req.prompt}
             ],
             temperature=0.0  # Zero temperature for deterministic strict JSON compliance
@@ -108,6 +153,8 @@ async def generate_advanced(req: AdvancedGenerateRequest):
                 grid_y=data.get("grid_y", 1),
                 base_height=6,
                 template_name=data.get("template_name", "basic_storage_bin"),
+                item_count=data.get("item_count"),
+                component_id=data.get("component_id"),
                 operations=[],
                 raw_response=raw_text
             )
@@ -121,6 +168,8 @@ async def generate_advanced(req: AdvancedGenerateRequest):
                 grid_y=1,
                 base_height=6,
                 template_name="basic_storage_bin",
+                item_count=None,
+                component_id=None,
                 operations=[{"type": "decode_error_fallback", "error": str(je)}],
                 raw_response=raw_text
             )
@@ -136,6 +185,8 @@ async def generate_advanced(req: AdvancedGenerateRequest):
             grid_y=1,
             base_height=6,
             template_name="basic_storage_bin",
+            item_count=None,
+            component_id=None,
             operations=[{"type": "connection_error_fallback", "error": str(e)}],
             raw_response=f"Fallback active: Local daemon failed. Ensure Ollama is running. {str(e)}"
         )

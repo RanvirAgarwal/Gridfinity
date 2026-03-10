@@ -1,0 +1,239 @@
+{
+    "Electronics Boards": {
+        "arduino_uno": {
+            "length": 68.6,
+            "width": 53.4,
+            "thickness": 1.6,
+            "mount_hole_diameter": 3.2,
+            "mount_pattern": [
+                [
+                    14,
+                    2.5
+                ],
+                [
+                    66,
+                    7.5
+                ],
+                [
+                    66,
+                    35.5
+                ],
+                [
+                    15.3,
+                    50.8
+                ]
+            ]
+        },
+        "arduino_nano": {
+            "length": 45,
+            "width": 18,
+            "thickness": 1.6,
+            "pin_pitch": 2.54
+        },
+        "esp32_devkit": {
+            "length": 54,
+            "width": 27,
+            "thickness": 1.6,
+            "pin_pitch": 2.54
+        },
+        "raspberry_pi_4": {
+            "length": 85,
+            "width": 56,
+            "thickness": 1.6,
+            "mount_hole_diameter": 2.7,
+            "mount_pattern": [
+                [
+                    3.5,
+                    3.5
+                ],
+                [
+                    61.5,
+                    3.5
+                ],
+                [
+                    61.5,
+                    52.5
+                ],
+                [
+                    3.5,
+                    52.5
+                ]
+            ]
+        }
+    },
+    "Breadboards": {
+        "breadboard_half": {
+            "length": 83,
+            "width": 55,
+            "height": 8.5
+        },
+        "breadboard_full": {
+            "length": 165,
+            "width": 55,
+            "height": 8.5
+        }
+    },
+    "Batteries": {
+        "18650": {
+            "diameter": 18.6,
+            "length": 65
+        },
+        "21700": {
+            "diameter": 21,
+            "length": 70
+        },
+        "aa": {
+            "diameter": 14.5,
+            "length": 50.5
+        },
+        "aaa": {
+            "diameter": 10.5,
+            "length": 44.5
+        },
+        "cr2032": {
+            "diameter": 20,
+            "thickness": 3.2
+        }
+    },
+    "Connectors": {
+        "usb_c": {
+            "width": 8.4,
+            "height": 2.6,
+            "depth": 7.5
+        },
+        "usb_a": {
+            "width": 12,
+            "height": 4.5,
+            "depth": 14
+        },
+        "hdmi": {
+            "width": 14,
+            "height": 4.5,
+            "depth": 10
+        },
+        "dupont_header": {
+            "pin_pitch": 2.54,
+            "pin_diameter": 0.64
+        },
+        "wago_221": {
+            "width": 18.6,
+            "depth": 8.4,
+            "height": 16
+        },
+        "xt60": {
+            "width": 15.5,
+            "height": 8,
+            "depth": 20
+        }
+    },
+    "Fasteners": {
+        "m2": {
+            "diameter": 2,
+            "head_diameter": 3.8,
+            "clearance": 2.2
+        },
+        "m2_5": {
+            "diameter": 2.5,
+            "head_diameter": 4.5,
+            "clearance": 2.7
+        },
+        "m3": {
+            "diameter": 3,
+            "head_diameter": 5.5,
+            "clearance": 3.2
+        },
+        "m4": {
+            "diameter": 4,
+            "head_diameter": 7,
+            "clearance": 4.2
+        },
+        "m5": {
+            "diameter": 5,
+            "head_diameter": 8.5,
+            "clearance": 5.2
+        }
+    },
+    "Keyboard Components": {
+        "mx_switch": {
+            "body": 14,
+            "plate_cutout": 14,
+            "pin_spacing": 5,
+            "recommended_spacing": 19.05
+        },
+        "mx_keycap": {
+            "width": 18,
+            "depth": 18,
+            "height": 10
+        },
+        "stabilizer": {
+            "spacing": 23.8,
+            "bar_diameter": 1.5
+        }
+    },
+    "Lab Equipment": {
+        "test_tube_10mm": {
+            "diameter": 10,
+            "length": 75
+        },
+        "test_tube_16mm": {
+            "diameter": 16,
+            "length": 100
+        },
+        "centrifuge_tube_15ml": {
+            "diameter": 17,
+            "length": 120
+        },
+        "centrifuge_tube_50ml": {
+            "diameter": 30,
+            "length": 115
+        },
+        "microscope_slide": {
+            "length": 75,
+            "width": 25,
+            "thickness": 1
+        },
+        "pipette": {
+            "diameter": 12,
+            "length": 150
+        }
+    },
+    "Storage Media": {
+        "sd_card": {
+            "length": 32,
+            "width": 24,
+            "thickness": 2.1
+        },
+        "micro_sd": {
+            "length": 15,
+            "width": 11,
+            "thickness": 1
+        },
+        "cfexpress": {
+            "length": 38.5,
+            "width": 29.8,
+            "thickness": 3.8
+        },
+        "nvme_m2": {
+            "length": 80,
+            "width": 22,
+            "thickness": 2.4
+        }
+    },
+    "Rings / Retail": {
+        "jewelry_ring": {
+            "diameter": 22,
+            "height": 6
+        }
+    },
+    "Cable Types": {
+        "usb_c_cable": {
+            "diameter": 4
+        },
+        "hdmi_cable": {
+            "diameter": 7
+        },
+        "ethernet_cable": {
+            "diameter": 6
+        }
+    }
+}

@@ -1,0 +1,3058 @@
+{
+  "arduino_uno": {
+    "category": "electronics_board",
+    "length": 68.6,
+    "width": 53.4,
+    "thickness": 1.6,
+    "mount_holes": [
+      [
+        14,
+        2.5
+      ],
+      [
+        66,
+        7.5
+      ],
+      [
+        66,
+        35.5
+      ],
+      [
+        15.3,
+        50.8
+      ]
+    ]
+  },
+  "arduino_nano": {
+    "category": "electronics_board",
+    "length": 45.0,
+    "width": 18.0,
+    "thickness": 1.6
+  },
+  "esp32_devkit_v1": {
+    "category": "electronics_board",
+    "length": 54.0,
+    "width": 27.0,
+    "thickness": 1.6
+  },
+  "raspberry_pi_4": {
+    "category": "electronics_board",
+    "length": 85.0,
+    "width": 56.0,
+    "thickness": 1.6
+  },
+  "raspberry_pi_zero": {
+    "category": "electronics_board",
+    "length": 65.0,
+    "width": 30.0,
+    "thickness": 1.6
+  },
+  "18650": {
+    "category": "battery",
+    "diameter": 18.6,
+    "length": 65
+  },
+  "21700": {
+    "category": "battery",
+    "diameter": 21,
+    "length": 70
+  },
+  "26650": {
+    "category": "battery",
+    "diameter": 26,
+    "length": 65
+  },
+  "aa": {
+    "category": "battery",
+    "diameter": 14.5,
+    "length": 50.5
+  },
+  "aaa": {
+    "category": "battery",
+    "diameter": 10.5,
+    "length": 44.5
+  },
+  "c": {
+    "category": "battery",
+    "diameter": 26.2,
+    "length": 50.0
+  },
+  "d": {
+    "category": "battery",
+    "diameter": 34.2,
+    "length": 61.5
+  },
+  "cr2032": {
+    "category": "battery",
+    "diameter": 20,
+    "thickness": 3.2
+  },
+  "cr2025": {
+    "category": "battery",
+    "diameter": 20,
+    "thickness": 2.5
+  },
+  "cr2016": {
+    "category": "battery",
+    "diameter": 20,
+    "thickness": 1.6
+  },
+  "m2": {
+    "category": "fastener",
+    "diameter": 2,
+    "clearance": 2.2,
+    "head_diameter": 3.6
+  },
+  "m3": {
+    "category": "fastener",
+    "diameter": 3,
+    "clearance": 3.2,
+    "head_diameter": 5.4
+  },
+  "m4": {
+    "category": "fastener",
+    "diameter": 4,
+    "clearance": 4.2,
+    "head_diameter": 7.2
+  },
+  "m5": {
+    "category": "fastener",
+    "diameter": 5,
+    "clearance": 5.2,
+    "head_diameter": 9.0
+  },
+  "m6": {
+    "category": "fastener",
+    "diameter": 6,
+    "clearance": 6.2,
+    "head_diameter": 10.8
+  },
+  "m7": {
+    "category": "fastener",
+    "diameter": 7,
+    "clearance": 7.2,
+    "head_diameter": 12.6
+  },
+  "m8": {
+    "category": "fastener",
+    "diameter": 8,
+    "clearance": 8.2,
+    "head_diameter": 14.4
+  },
+  "m9": {
+    "category": "fastener",
+    "diameter": 9,
+    "clearance": 9.2,
+    "head_diameter": 16.2
+  },
+  "m10": {
+    "category": "fastener",
+    "diameter": 10,
+    "clearance": 10.2,
+    "head_diameter": 18.0
+  },
+  "m11": {
+    "category": "fastener",
+    "diameter": 11,
+    "clearance": 11.2,
+    "head_diameter": 19.8
+  },
+  "m12": {
+    "category": "fastener",
+    "diameter": 12,
+    "clearance": 12.2,
+    "head_diameter": 21.6
+  },
+  "mx_switch": {
+    "category": "keyboard_switch",
+    "body": 14,
+    "pitch": 19.05
+  },
+  "choc_switch": {
+    "category": "keyboard_switch",
+    "body": 15,
+    "pitch": 18.0
+  },
+  "keycap": {
+    "category": "keyboard_keycap",
+    "width": 18,
+    "height": 10
+  },
+  "test_tube_10mm": {
+    "category": "lab_tube",
+    "diameter": 10,
+    "length": 100
+  },
+  "test_tube_12mm": {
+    "category": "lab_tube",
+    "diameter": 12,
+    "length": 100
+  },
+  "test_tube_13mm": {
+    "category": "lab_tube",
+    "diameter": 13,
+    "length": 100
+  },
+  "test_tube_16mm": {
+    "category": "lab_tube",
+    "diameter": 16,
+    "length": 100
+  },
+  "test_tube_18mm": {
+    "category": "lab_tube",
+    "diameter": 18,
+    "length": 100
+  },
+  "test_tube_20mm": {
+    "category": "lab_tube",
+    "diameter": 20,
+    "length": 100
+  },
+  "test_tube_25mm": {
+    "category": "lab_tube",
+    "diameter": 25,
+    "length": 100
+  },
+  "centrifuge_15ml": {
+    "category": "lab_tube",
+    "diameter": 17.0,
+    "length": 120.0
+  },
+  "centrifuge_50ml": {
+    "category": "lab_tube",
+    "diameter": 30.0,
+    "length": 115.0
+  },
+  "usb_c": {
+    "category": "connector",
+    "width": 8.4,
+    "height": 2.6,
+    "depth": 7.5
+  },
+  "usb_a": {
+    "category": "connector",
+    "width": 12,
+    "height": 4.5,
+    "depth": 14.0
+  },
+  "usb_micro": {
+    "category": "connector",
+    "width": 7.4,
+    "height": 2.0,
+    "depth": 6.0
+  },
+  "hdmi": {
+    "category": "connector",
+    "width": 14,
+    "height": 4.5,
+    "depth": 10.0
+  },
+  "ethernet_rj45": {
+    "category": "connector",
+    "width": 16,
+    "height": 14.0,
+    "depth": 21.0
+  },
+  "sd_card": {
+    "category": "storage_media",
+    "width": 24,
+    "length": 32,
+    "thickness": 2.1
+  },
+  "micro_sd": {
+    "category": "storage_media",
+    "width": 11,
+    "length": 15,
+    "thickness": 1
+  },
+  "nvme_m2": {
+    "category": "storage_media",
+    "width": 22,
+    "length": 80,
+    "thickness": 2.4
+  },
+  "0603": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "0805": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "1206": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "1210": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "2320": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "3_sip_module_tm1000q": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "3_sip_module_v7805_1000": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "3_sip_module_v7805_500": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "4_smd_2.35x2.95mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "6_dfn_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 7,
+    "length": 8.89,
+    "width": 4.45
+  },
+  "6_plcc_3.5x3.5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "air_quality_module_iaq_core_p": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "altimeter_ms580314ba": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "ambient_prox_apds_9960": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "antenna_1.6x3.2mm_2450at18a100e": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "as_mlv_p2_9.1x9.1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "barrel_jack_5.5mmodx2.1mmid_pj_102a": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "barrel_jack_5.5mmodx2.1mmid_pj_202a": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "battery_holder_9v_bc9vpc_nd": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "battery_holder_coin_2032_bs_7": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "bluetooth_module_450_0064": {
+    "category": "electronic_footprint",
+    "pad_count": 165,
+    "length": 209.55,
+    "width": 104.78
+  },
+  "bluetooth_module_bc118": {
+    "category": "electronic_footprint",
+    "pad_count": 35,
+    "length": 44.45,
+    "width": 22.23
+  },
+  "bluetooth_module_bc127": {
+    "category": "electronic_footprint",
+    "pad_count": 51,
+    "length": 64.77,
+    "width": 32.38
+  },
+  "bluetooth_module_bl600_sa": {
+    "category": "electronic_footprint",
+    "pad_count": 44,
+    "length": 55.88,
+    "width": 27.94
+  },
+  "bluetooth_module_ble112_a_v1": {
+    "category": "electronic_footprint",
+    "pad_count": 30,
+    "length": 38.1,
+    "width": 19.05
+  },
+  "bluetooth_module_ble113_a_m256k": {
+    "category": "electronic_footprint",
+    "pad_count": 36,
+    "length": 45.72,
+    "width": 22.86
+  },
+  "bluetooth_module_ble113_a_v1": {
+    "category": "electronic_footprint",
+    "pad_count": 36,
+    "length": 45.72,
+    "width": 22.86
+  },
+  "bluetooth_module_ble121lr_a_m256k": {
+    "category": "electronic_footprint",
+    "pad_count": 36,
+    "length": 45.72,
+    "width": 22.86
+  },
+  "bluetooth_module_bm77": {
+    "category": "electronic_footprint",
+    "pad_count": 33,
+    "length": 41.91,
+    "width": 20.96
+  },
+  "bluetooth_module_bmd_300": {
+    "category": "electronic_footprint",
+    "pad_count": 47,
+    "length": 59.69,
+    "width": 29.84
+  },
+  "bluetooth_module_cyble_022001_00": {
+    "category": "electronic_footprint",
+    "pad_count": 21,
+    "length": 26.67,
+    "width": 13.34
+  },
+  "bluetooth_module_rfd22301": {
+    "category": "electronic_footprint",
+    "pad_count": 19,
+    "length": 24.13,
+    "width": 12.06
+  },
+  "bluetooth_module_rfd77101": {
+    "category": "electronic_footprint",
+    "pad_count": 45,
+    "length": 57.15,
+    "width": 28.57
+  },
+  "bluetooth_module_rn4020": {
+    "category": "electronic_footprint",
+    "pad_count": 22,
+    "length": 27.94,
+    "width": 13.97
+  },
+  "bluetooth_module_rn42_i_rm": {
+    "category": "electronic_footprint",
+    "pad_count": 36,
+    "length": 45.72,
+    "width": 22.86
+  },
+  "bluetooth_module_rn42": {
+    "category": "electronic_footprint",
+    "pad_count": 36,
+    "length": 45.72,
+    "width": 22.86
+  },
+  "bluetooth_module_rn4677_vrm100": {
+    "category": "electronic_footprint",
+    "pad_count": 33,
+    "length": 41.91,
+    "width": 20.96
+  },
+  "bluetooth_module_rn52_irm": {
+    "category": "electronic_footprint",
+    "pad_count": 50,
+    "length": 63.5,
+    "width": 31.75
+  },
+  "bluetooth_module_wt12_a_ai5": {
+    "category": "electronic_footprint",
+    "pad_count": 31,
+    "length": 39.37,
+    "width": 19.68
+  },
+  "bluetooth_module_wt32i_a_ai6": {
+    "category": "electronic_footprint",
+    "pad_count": 50,
+    "length": 63.5,
+    "width": 31.75
+  },
+  "bme680": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "bmi160": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "cb_5_formed_leads": {
+    "category": "electronic_footprint",
+    "pad_count": 29,
+    "length": 36.83,
+    "width": 18.41
+  },
+  "cellular_breakout_2542": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "cellular_modem_nl_sw_evdo_v": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "cellular_modem_nl_sw_lte_gels3_c": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "cellular_modem_nl_sw_lte_tsvg": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "coax_conn_u.fl": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "dfn_10_2x2mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "dfn_10_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "dfn_12_1ep_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 13,
+    "length": 16.51,
+    "width": 8.26
+  },
+  "dfn_6_3x3mm_ep1": {
+    "category": "electronic_footprint",
+    "pad_count": 7,
+    "length": 8.89,
+    "width": 4.45
+  },
+  "diode_do_35_p10mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "dip_10_w10.16mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "dip_14_w3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "dip_16_w7.62mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "dip_18_w7.62mm": {
+    "category": "electronic_footprint",
+    "pad_count": 18,
+    "length": 22.86,
+    "width": 11.43
+  },
+  "dip_20_w7.62mm": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "dip_28_w7.62mm": {
+    "category": "electronic_footprint",
+    "pad_count": 28,
+    "length": 35.56,
+    "width": 17.78
+  },
+  "dip_40_w15.24mm": {
+    "category": "electronic_footprint",
+    "pad_count": 40,
+    "length": 50.8,
+    "width": 25.4
+  },
+  "dip_4_w7.62mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "dip_6_w7.62mm": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "dip_8_w7.62mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "displayport_2040210_1": {
+    "category": "electronic_footprint",
+    "pad_count": 25,
+    "length": 31.75,
+    "width": 15.88
+  },
+  "displayport_mini_2129320_3": {
+    "category": "electronic_footprint",
+    "pad_count": 26,
+    "length": 33.02,
+    "width": 16.51
+  },
+  "do_214ab": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "do_214ac": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "do_35": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "do_35_nk": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "do_41": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "dsbga_8_1.6x1.6mm": {
+    "category": "electronic_footprint",
+    "pad_count": 9,
+    "length": 11.43,
+    "width": 5.71
+  },
+  "dsub_9_jack_5747840_3": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "dsub_9_receptical_a_df_09_a_kg_t2s": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "dvi_female_74320_9004": {
+    "category": "electronic_footprint",
+    "pad_count": 26,
+    "length": 33.02,
+    "width": 16.51
+  },
+  "dvi_female_74320_9010": {
+    "category": "electronic_footprint",
+    "pad_count": 32,
+    "length": 40.64,
+    "width": 20.32
+  },
+  "esp32_wroom_32d": {
+    "category": "electronic_footprint",
+    "pad_count": 39,
+    "length": 49.53,
+    "width": 24.77
+  },
+  "ethernet_jack_54602_908lf": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "ethernet_jack_arjc02_111008b": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "ethernet_jack_rjlse4208101t": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "flir_lepton_socket_1050281001": {
+    "category": "electronic_footprint",
+    "pad_count": 68,
+    "length": 86.36,
+    "width": 43.18
+  },
+  "gas_sensor_110_109": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "gas_sensor_110_202": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "gps_module_cam_m8c_0": {
+    "category": "electronic_footprint",
+    "pad_count": 31,
+    "length": 39.37,
+    "width": 19.68
+  },
+  "gsm_module_17.8x16.5mm_a2235_h": {
+    "category": "electronic_footprint",
+    "pad_count": 31,
+    "length": 39.37,
+    "width": 19.68
+  },
+  "hall_sensor_sip_3_a132_lua_t": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "hdmi_a_female_2000_1_2_41_00_bk": {
+    "category": "electronic_footprint",
+    "pad_count": 25,
+    "length": 31.75,
+    "width": 15.88
+  },
+  "hdmi_female_dc3rx19ja3r1700": {
+    "category": "electronic_footprint",
+    "pad_count": 23,
+    "length": 29.21,
+    "width": 14.61
+  },
+  "hdmi_mini_female_2001_1_2_21_00_bk": {
+    "category": "electronic_footprint",
+    "pad_count": 25,
+    "length": 31.75,
+    "width": 15.88
+  },
+  "headerpin_2x2_p4.2_drill1.4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "headphone_jack_2.5mm_sj1_2503a": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "headphone_jack_3.5mm_sj1_3523n": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "headphone_jack_6.35mm_ra49b14b": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "headphone_jack_6.35mm_sn49b12b": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "htqfp_100_14x14mm": {
+    "category": "electronic_footprint",
+    "pad_count": 182,
+    "length": 231.14,
+    "width": 115.57
+  },
+  "humidity_hih_4030": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "humidity_hih61xx": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "humidity_sht15": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "icl_tht_p17.1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "icl_tht_p7.8mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "imu_module_sen0140": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "inductor_13r106c": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "ir_receiver_tsop38238": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "jumper_micro_miniature_p5.31mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "jumper_micro_miniature_p5.375mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "jumper_tin_p10.9mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "jumper_tin_p5.32mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "jumper_tin_p5.38mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "led_0603": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "led_2_smd_gull_wing_4.4x3.85mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "led_2_smd_no_lead_1.7x0.8mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "led_3mm_radial": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "led_5mm_radial": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "led_7seg_vaos_c402s9_bw_50": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "led_bar_graph_lta_1000": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "led_breakout_parallax_ws2812b": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "led_dual0603": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "led_ir_tsal6100": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "led_rgb_wp154a4sureqbfzgc": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "lfqfn_16_1ep_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 17,
+    "length": 21.59,
+    "width": 10.79
+  },
+  "lfqfn_16_1ep_4x4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 17,
+    "length": 21.59,
+    "width": 10.79
+  },
+  "lga_12_4.8x2.8_vl6180": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "lga_12_9x9mm_lsm303c": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "lga_14l_2.5x3mm__lsm6ds3": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "lga_14_2x2mm": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "lga_14_3x5mm_reva": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "lga_24_3x3.5mm_lsm9ds1": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "lga_28_5.2x3.8mm_bno0055": {
+    "category": "electronic_footprint",
+    "pad_count": 28,
+    "length": 35.56,
+    "width": 17.78
+  },
+  "lga_8_2x2.5mm_bmp280": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "light_to_freq_tsl235r_lf": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "llc_36_9x9mm_hmc6343": {
+    "category": "electronic_footprint",
+    "pad_count": 36,
+    "length": 45.72,
+    "width": 22.86
+  },
+  "llga_10_2.5x2.5mm_lps25hb": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "lora_module_rm103": {
+    "category": "electronic_footprint",
+    "pad_count": 47,
+    "length": 59.69,
+    "width": 29.84
+  },
+  "lqfp_100_14x14mm": {
+    "category": "electronic_footprint",
+    "pad_count": 100,
+    "length": 127.0,
+    "width": 63.5
+  },
+  "lqfp_32_7x7mm": {
+    "category": "electronic_footprint",
+    "pad_count": 32,
+    "length": 40.64,
+    "width": 20.32
+  },
+  "lqfp_48_7x7mm": {
+    "category": "electronic_footprint",
+    "pad_count": 48,
+    "length": 60.96,
+    "width": 30.48
+  },
+  "lqfp_64_10x10mm": {
+    "category": "electronic_footprint",
+    "pad_count": 64,
+    "length": 81.28,
+    "width": 40.64
+  },
+  "lsoj_6_w3.76mm": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "lssop_24_w5.6mm": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "mag_jack_module_wiz820io": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "microsd_2908_05wb_mg": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "mic_cma_4544pf_w": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "molex_734120114_umc_rf_conn_vertical": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "msop_10_1ep_w3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "msop_10_w3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "msop_12_1ep_w3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 13,
+    "length": 16.51,
+    "width": 8.26
+  },
+  "msop_8_1ep_w3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "msop_8_w2.80mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "multiwatt_11": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "multiwatt_15": {
+    "category": "electronic_footprint",
+    "pad_count": 15,
+    "length": 19.05,
+    "width": 9.53
+  },
+  "oled_128x32_folded": {
+    "category": "electronic_footprint",
+    "pad_count": 15,
+    "length": 19.05,
+    "width": 9.53
+  },
+  "oplga_6_veml6070": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "oscillator_fxo_lc73": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "oscillator_mems_sit1533ai_h4_dcc_32.768e": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "oscillator_xlh536025.000000i": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "oscillator_xlh736022.579200i": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "particle_photon": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "pc_test_point_mini_3.43x1.78mm": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pc_test_point_mini_3.8x2.03mm": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pc_test_point_smd": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "phone_jack_87180_062lf": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "photodiode_1206": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "photodiode_3mm_radial": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "photodiode_5mm_radial": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "photodiode_radial_5.1x3mm_p2.54mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "photodiode_tht_bpw34": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "phototransistor_4.4x1.5mm_p2.54_radial": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "phototransistor_smd_4x2mm_temt6000x01": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "piezo_9x9mm_pkmcs0909e4000_r1": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "piezo_transducer_tht_ps1240p02bt": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pinheader_1x2_p2.54mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pinheader_1x2_p2.54mm_drill1.02mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pinheader_1x2_p2.5mm_drill1.1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pinheader_1x2_p2mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "pinheader_1x2_p2mm_drill1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pinheader_1x2_p2mm_drill1mm_ra": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pinheader_1x2_p3.96mm_drill1.6mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pinheader_1x3_p2.54mm_drill1.02mm": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "pinheader_1x3_p2.54_drill1.1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "pinheader_1x3_p2.5mm_drill1.1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "pinheader_1x3_p2mm_drill1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "pinheader_1x40_p2.54_drill1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 40,
+    "length": 50.8,
+    "width": 25.4
+  },
+  "pinheader_1x4_p2.54mm_drill1.02mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "pinheader_1x4_p2.5mm_drill1.1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "pinheader_1x4_p2mm_drill1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "pinheader_1x5_p2.5mm_drill1.1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "pinheader_2x1mm_p2mm_smd_ra": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "pinheader_2x5_p1.27mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "pinheader_2x5_p1.27mm_drill.7mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "pinheader_2x5_p1.27_smd": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "pinheader_2x5_p2.54mm_drill1.2mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "pinheader_2x6_p2.54mm_vertical_smd": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "pinheader_2x7_p2mm_drill1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "pinheader_2x7_p2mm_smd": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "pinheader_6x2_p2.54mm_horizontal": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "pinheader_6x2_p2.54mm_vertical": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "potentiometer_p120pk_y25br10k": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "powersoic_8_w3.9mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "pressure_sensor_lga_8_2.5x2.5mm_bme280": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "probe_pad_0603": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "probe_pad_0805": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "probe_pad_1206": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pushbutton_12x12mm_tht_gpts203211b": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "pushbutton_round_d12mm_tht_ks_01q_01": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "qfn_10_1ep_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "qfn_20_1ep_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 37,
+    "length": 46.99,
+    "width": 23.5
+  },
+  "qfn_20_1ep_4x4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 37,
+    "length": 46.99,
+    "width": 23.5
+  },
+  "qfn_20_1ep_4x4mm_reva": {
+    "category": "electronic_footprint",
+    "pad_count": 21,
+    "length": 26.67,
+    "width": 13.34
+  },
+  "qfn_24_1ep_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 25,
+    "length": 31.75,
+    "width": 15.88
+  },
+  "qfn_24_1ep_4x4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "qfn_32_1ep_5x5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 42,
+    "length": 53.34,
+    "width": 26.67
+  },
+  "qfn_48_1ep_6x6mm": {
+    "category": "electronic_footprint",
+    "pad_count": 49,
+    "length": 62.23,
+    "width": 31.12
+  },
+  "qfn_48_1ep_7x7mm": {
+    "category": "electronic_footprint",
+    "pad_count": 74,
+    "length": 93.98,
+    "width": 46.99
+  },
+  "reflective_sensor_qrd1114": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "reflective_sensor_qre1113": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "relay_jsm1_12v_5": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "relay_reed_9007_05_00": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "relay_tht_ec2": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "relay_tht_g5le_14": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "relay_tht_g5v_1": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "relay_tht_g5v_2": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "rf_ism_module_mrf89xam9a": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "rf_location_tracking_dwm1000": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "rf_module_com_13909": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "rf_module_rxm_418_lr": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "rf_module_rxm_433_lr": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "rf_module_spbt2632c2a.at2": {
+    "category": "electronic_footprint",
+    "pad_count": 22,
+    "length": 27.94,
+    "width": 13.97
+  },
+  "rf_module_spwf01sa.11": {
+    "category": "electronic_footprint",
+    "pad_count": 30,
+    "length": 38.1,
+    "width": 19.05
+  },
+  "rf_module_txm_433_lr": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "rf_sma_boardedge_142_0701_801": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "rf_sma_receptical_vertical_consma001_smd_g": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "rf_sma_rightangle_5_1814400_1": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "rf_sma_vertical_5_1814832_1": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "rj45_female_rb1_125bag1a": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "rotary_encoder_switched_pec11r": {
+    "category": "electronic_footprint",
+    "pad_count": 7,
+    "length": 8.89,
+    "width": 4.45
+  },
+  "sc_70_5": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "sc_74": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "sd_holder_787231001": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "sim_473080001": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "sim_nano_5045200691": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "sip_3_p2.54mm": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "sip_3_p2.54mm_oki_78sr_5_1.5_w36_c": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "sip_4_w3.81mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "sip_9_p2.54mm": {
+    "category": "electronic_footprint",
+    "pad_count": 9,
+    "length": 11.43,
+    "width": 5.71
+  },
+  "sitime_smd_6_1ep": {
+    "category": "electronic_footprint",
+    "pad_count": 7,
+    "length": 8.89,
+    "width": 4.45
+  },
+  "smd_14_grideye": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "smd_2_3.2x1.5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "smd_2_3.2x2.5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "smd_4_3.3x2.8_pd15_22c_tr8": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "smd_4_3.4x2.7mm_p1.8mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "smd_4_4.4x3.85mm_p2.54mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "smd_4_4.6x7.62mm_p2.54mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "smd_4_5x4.4mm_p4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "smd_5_6_3.83x2.79mm": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "smd_5_6_r_3.83x2.79mm": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "smd_8_5x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "smd_8_7x5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "smoke_sensor_max30105efd+": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "socket_dip_14_7.62mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "socket_dip_16_7.62mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "socket_dip_18_7.62mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 18,
+    "length": 22.86,
+    "width": 11.43
+  },
+  "socket_dip_20_7.62mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "socket_dip_24_15.24mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "socket_dip_24_7.62mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "socket_dip_28_15.24mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 28,
+    "length": 35.56,
+    "width": 17.78
+  },
+  "socket_dip_28_7.62mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 28,
+    "length": 35.56,
+    "width": 17.78
+  },
+  "socket_dip_32_15.24mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 32,
+    "length": 40.64,
+    "width": 20.32
+  },
+  "socket_dip_40_15.24mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 40,
+    "length": 50.8,
+    "width": 25.4
+  },
+  "socket_dip_6_7.62mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "socket_dip_8_7.62mm_conn": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "sod_123": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "sod_323": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "sod_323f": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "sod_523": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "sod_80": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "soic_14_w3.9mm": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "soic_16_w3.90mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "soic_16_w7.5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "soic_18_w7.5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 18,
+    "length": 22.86,
+    "width": 11.43
+  },
+  "soic_20_w7.5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "soic_24_w7.50mm": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "soic_28_w7.5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 28,
+    "length": 35.56,
+    "width": 17.78
+  },
+  "soic_6_5_w4.55mm": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "soic_7_8_w3.9mm": {
+    "category": "electronic_footprint",
+    "pad_count": 7,
+    "length": 8.89,
+    "width": 4.45
+  },
+  "soic_8_1ep_w3.9mm": {
+    "category": "electronic_footprint",
+    "pad_count": 9,
+    "length": 11.43,
+    "width": 5.71
+  },
+  "soic_8_w3.9mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "soic_8_w5.3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "soic_8_w5.6mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "sop_4_w3.81mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "sot_143_4": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "sot_223_4": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "sot_223": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "sot_23_3": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "sot_23_6": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "sot_23_8": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "sot_23w": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "sot_3": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "sot_323": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "sot_353": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "sot_363": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "sot_523": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "sot_553": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "sot_563": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "sot_753": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "sot23_6l": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "sph0645lm4h_b": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "ssop_16_w3.90mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "ssop_20_w3.9mm": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "ssop_20_w5.3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "ssop_24_w5.30mm": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "ssop_28_w5.30mm": {
+    "category": "electronic_footprint",
+    "pad_count": 28,
+    "length": 35.56,
+    "width": 17.78
+  },
+  "switch_nav_12.4x12.4mm_smd_js5208": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "switch_slide_11.6x4mm_eg1218": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "switch_slide_11.6x4mm_sj_3523_smt": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "switch_slide_js202011scqn": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "switch_tactile_smd_4.5x4.5mm_tl3315nf160q": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "switch_tactile_smd_6x6mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "switch_tactile_smd_6x6mm_pts645": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "switch_tactile_smd_b3u_1000p": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "switch_tactile_tht_6x6mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "switch_tactile_tht_6x6mm_mjtp1230": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "switch_tactile_tht_b3f_1xxx": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "switch_toggle_ate1d_2m3_10_z": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "tco_5.5mm_radial": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "tdfn_8_1ep": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "terminal_block_d1.3mm_p5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "term_block_1x10_p5.08mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "term_block_1x12_p5.08mm": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "term_block_1x12_p5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "term_block_1x2_p10.16mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "term_block_1x2_p5.08mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "term_block_1x2_p5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "term_block_1x3_p5.08mm": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "term_block_1x3_p5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "term_block_1x4_p5.08mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "term_block_1x4_p5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "term_block_1x5_p5.08mm": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "term_block_1x5_p5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "term_block_1x6_p5.08mm": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "term_block_1x6_p5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "term_block_1x7_p5.08mm": {
+    "category": "electronic_footprint",
+    "pad_count": 7,
+    "length": 8.89,
+    "width": 4.45
+  },
+  "term_block_1x7_p5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 7,
+    "length": 8.89,
+    "width": 4.45
+  },
+  "term_block_1x8_p5.08mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "term_block_1x8_p5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "test_point_pin_drill2.79mm": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "test_jack_horiz": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "test_point_2.67x1.02mm": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "test_point_3.43x1.78mm": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "test_point_d1.02mm": {
+    "category": "electronic_footprint",
+    "pad_count": 1,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "tflga_16_3x3.25mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "tflga_16_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "tfqfn_24_1ep_4x4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 34,
+    "length": 43.18,
+    "width": 21.59
+  },
+  "tfsop_12_16_w3.00mm": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "tfsop_16_w3.00mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "thermocouple_connector_pcc_smp_k": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "tilt_switch_rb_220_07a_r": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "tlga_8_3x5": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "to_18_3": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "to_204aa": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "to_220_11": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "to_220_3": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "to_220_5": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "to_225aa": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "to_243aa": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "to_247_3": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "to_252_3": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "to_253_4": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "to_261_4": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "to_269aa": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "to_39_3": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "to_39_4": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "to_3p_5": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "to_92_3": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "to_92_3_formed_leads": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "toggle_switch_100sp1t1b4m2qe": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "toggle_switch_100sp1t2b4m6qe": {
+    "category": "electronic_footprint",
+    "pad_count": 5,
+    "length": 6.35,
+    "width": 3.17
+  },
+  "top_3_vertical_insulated": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "tqfn_20_1ep_5x5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 21,
+    "length": 26.67,
+    "width": 13.34
+  },
+  "tqfn_44_1ep_7x7mm": {
+    "category": "electronic_footprint",
+    "pad_count": 45,
+    "length": 57.15,
+    "width": 28.57
+  },
+  "tqfp_100_12x12mm": {
+    "category": "electronic_footprint",
+    "pad_count": 100,
+    "length": 127.0,
+    "width": 63.5
+  },
+  "tqfp_100_14x14mm": {
+    "category": "electronic_footprint",
+    "pad_count": 100,
+    "length": 127.0,
+    "width": 63.5
+  },
+  "tqfp_32_7x7mm": {
+    "category": "electronic_footprint",
+    "pad_count": 32,
+    "length": 40.64,
+    "width": 20.32
+  },
+  "tqfp_44_10x10mm": {
+    "category": "electronic_footprint",
+    "pad_count": 44,
+    "length": 55.88,
+    "width": 27.94
+  },
+  "tqfp_48_7x7mm": {
+    "category": "electronic_footprint",
+    "pad_count": 48,
+    "length": 60.96,
+    "width": 30.48
+  },
+  "tqfp_64_7x7mm": {
+    "category": "electronic_footprint",
+    "pad_count": 64,
+    "length": 81.28,
+    "width": 40.64
+  },
+  "trans_sot_223_4": {
+    "category": "electronic_footprint",
+    "pad_count": 4,
+    "length": 5.08,
+    "width": 3.0
+  },
+  "trimpot_3.8mmx3.6mm_tc33x_2_103e": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "tssop_14_w4.4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 14,
+    "length": 17.78,
+    "width": 8.89
+  },
+  "tssop_16_1ep_w4.40mm": {
+    "category": "electronic_footprint",
+    "pad_count": 25,
+    "length": 31.75,
+    "width": 15.88
+  },
+  "tssop_20_1ep_w4.4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 40,
+    "length": 50.8,
+    "width": 25.4
+  },
+  "tssop_20_w4.4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "tssop_24_w4.40mm": {
+    "category": "electronic_footprint",
+    "pad_count": 24,
+    "length": 30.48,
+    "width": 15.24
+  },
+  "tssop_28_1ep_w4.40mm": {
+    "category": "electronic_footprint",
+    "pad_count": 54,
+    "length": 68.58,
+    "width": 34.29
+  },
+  "tssop_28_w4.40mm": {
+    "category": "electronic_footprint",
+    "pad_count": 28,
+    "length": 35.56,
+    "width": 17.78
+  },
+  "tssop_28_w5.60mm": {
+    "category": "electronic_footprint",
+    "pad_count": 28,
+    "length": 35.56,
+    "width": 17.78
+  },
+  "tssop_8_w3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "tssop_8_w4.4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "udfn_6_1ep_2x2mm": {
+    "category": "electronic_footprint",
+    "pad_count": 7,
+    "length": 8.89,
+    "width": 4.45
+  },
+  "udfn_6_1ep_2x2mm_uson": {
+    "category": "electronic_footprint",
+    "pad_count": 9,
+    "length": 11.43,
+    "width": 5.71
+  },
+  "ufbga_wlcsp_62": {
+    "category": "electronic_footprint",
+    "pad_count": 62,
+    "length": 78.74,
+    "width": 39.37
+  },
+  "ufdfn_10_2.5x1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "ufdfn_6_1.45x1mm": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "ufqfn_28_1ep_4x4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 29,
+    "length": 36.83,
+    "width": 18.41
+  },
+  "ufqfn_32_1ep_5x5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 33,
+    "length": 41.91,
+    "width": 20.96
+  },
+  "umcoax_pin_1909763_1": {
+    "category": "electronic_footprint",
+    "pad_count": 3,
+    "length": 3.81,
+    "width": 3.0
+  },
+  "usb_c_female_12401x": {
+    "category": "electronic_footprint",
+    "pad_count": 30,
+    "length": 38.1,
+    "width": 19.05
+  },
+  "usb_c_female_cx70m_24p1": {
+    "category": "electronic_footprint",
+    "pad_count": 42,
+    "length": 53.34,
+    "width": 26.67
+  },
+  "usb_c_female_e8124_015_01": {
+    "category": "electronic_footprint",
+    "pad_count": 34,
+    "length": 43.18,
+    "width": 21.59
+  },
+  "usb_c_female_vert_dx07s024wj3r400": {
+    "category": "electronic_footprint",
+    "pad_count": 30,
+    "length": 38.1,
+    "width": 19.05
+  },
+  "usb_c_male_edgemnt_dx07p024aj1r1500": {
+    "category": "electronic_footprint",
+    "pad_count": 30,
+    "length": 38.1,
+    "width": 19.05
+  },
+  "usb_c_male_edgemnt_dx07p024mj1r1500": {
+    "category": "electronic_footprint",
+    "pad_count": 32,
+    "length": 40.64,
+    "width": 20.32
+  },
+  "usb_c_rugged_ra_musbrm1c1m0": {
+    "category": "electronic_footprint",
+    "pad_count": 32,
+    "length": 40.64,
+    "width": 20.32
+  },
+  "usb_a_female_au_y1006_3": {
+    "category": "electronic_footprint",
+    "pad_count": 13,
+    "length": 16.51,
+    "width": 8.26
+  },
+  "usb_a_female_e8199_001_01": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "usb_a_female_ue27ac54100": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "usb_a_female_vertical_ra_73725_0110blf": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "usb_male_a_up2_ah_1_th": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "usb_micro_ab_female_0475890001": {
+    "category": "electronic_footprint",
+    "pad_count": 17,
+    "length": 21.59,
+    "width": 10.79
+  },
+  "usb_micro_a_3.1_female_gsb443t33hr": {
+    "category": "electronic_footprint",
+    "pad_count": 18,
+    "length": 22.86,
+    "width": 11.43
+  },
+  "usb_micro_b_female_0473460001": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "usb_micro_b_female_10103594_0001lf": {
+    "category": "electronic_footprint",
+    "pad_count": 13,
+    "length": 16.51,
+    "width": 8.26
+  },
+  "usb_micro_b_female_10118192": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "usb_micro_b_female_10118193_0001lf": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "usb_micro_b_female_10118194_0001lf": {
+    "category": "electronic_footprint",
+    "pad_count": 9,
+    "length": 11.43,
+    "width": 5.71
+  },
+  "usb_micro_b_female_1050170001": {
+    "category": "electronic_footprint",
+    "pad_count": 17,
+    "length": 21.59,
+    "width": 10.79
+  },
+  "usb_micro_b_female_vert_1051330001": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "usb_micro_b_male_uj2_mibh_4_smt_tr": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "usb_mini_b_female_548190519": {
+    "category": "electronic_footprint",
+    "pad_count": 7,
+    "length": 8.89,
+    "width": 4.45
+  },
+  "usb_mini_b_female_690_005_299_043": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "usb_mini_b_female_uj2_mbh_1_smt_tr": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "usb_mini_b_female_ux60_mb_5st": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "vflga_12_2x2mm": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "vflga_16_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "vfqfn_16_1ep_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 17,
+    "length": 21.59,
+    "width": 10.79
+  },
+  "vfqfn_28_1ep_5x5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 29,
+    "length": 36.83,
+    "width": 18.41
+  },
+  "vfqfn_40_1ep_6x6mm": {
+    "category": "electronic_footprint",
+    "pad_count": 41,
+    "length": 52.07,
+    "width": 26.04
+  },
+  "vfqfn_64_1ep_9x9mm": {
+    "category": "electronic_footprint",
+    "pad_count": 65,
+    "length": 82.55,
+    "width": 41.27
+  },
+  "vl53l0cxv0dh_1": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "voc_sensor_lga_10_1ep_2.7x4mm_ccs811b": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "vqfn_16_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "vqfn_28_1ep_6x6mm": {
+    "category": "electronic_footprint",
+    "pad_count": 29,
+    "length": 36.83,
+    "width": 18.41
+  },
+  "vson_10_1ep_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 30,
+    "length": 38.1,
+    "width": 19.05
+  },
+  "wfdfn_14_1ep_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 15,
+    "length": 19.05,
+    "width": 9.53
+  },
+  "wfdfn_6_1.5x1.5mm": {
+    "category": "electronic_footprint",
+    "pad_count": 6,
+    "length": 7.62,
+    "width": 3.81
+  },
+  "wfdfn_8_1ep_3x3mm": {
+    "category": "electronic_footprint",
+    "pad_count": 9,
+    "length": 11.43,
+    "width": 5.71
+  },
+  "wfqfn_10_2x2mm": {
+    "category": "electronic_footprint",
+    "pad_count": 10,
+    "length": 12.7,
+    "width": 6.35
+  },
+  "wfqfn_38_1ep_5x7mm": {
+    "category": "electronic_footprint",
+    "pad_count": 39,
+    "length": 49.53,
+    "width": 24.77
+  },
+  "wifi_module_atwinc1500_mr210pb": {
+    "category": "electronic_footprint",
+    "pad_count": 29,
+    "length": 36.83,
+    "width": 18.41
+  },
+  "wifi_module_esp8266_2491": {
+    "category": "electronic_footprint",
+    "pad_count": 16,
+    "length": 20.32,
+    "width": 10.16
+  },
+  "wifi_module_esp8266_wrl_13678": {
+    "category": "electronic_footprint",
+    "pad_count": 8,
+    "length": 10.16,
+    "width": 5.08
+  },
+  "wifi_module_mrf24wg0ma": {
+    "category": "electronic_footprint",
+    "pad_count": 36,
+    "length": 45.72,
+    "width": 22.86
+  },
+  "wifi_module_rn171": {
+    "category": "electronic_footprint",
+    "pad_count": 52,
+    "length": 66.04,
+    "width": 33.02
+  },
+  "wifi_module_wf111_e_v1": {
+    "category": "electronic_footprint",
+    "pad_count": 33,
+    "length": 41.91,
+    "width": 20.96
+  },
+  "wifi_module_wf121_a_v2": {
+    "category": "electronic_footprint",
+    "pad_count": 55,
+    "length": 69.85,
+    "width": 34.92
+  },
+  "wiznet_module_wiz810mj": {
+    "category": "electronic_footprint",
+    "pad_count": 56,
+    "length": 71.12,
+    "width": 35.56
+  },
+  "wqfn_16_1ep_4x4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 17,
+    "length": 21.59,
+    "width": 10.79
+  },
+  "wqfn_20_1ep_4x4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 50,
+    "length": 63.5,
+    "width": 31.75
+  },
+  "wqfn_24_1ep_4x4mm": {
+    "category": "electronic_footprint",
+    "pad_count": 25,
+    "length": 31.75,
+    "width": 15.88
+  },
+  "wson_8_2x2mm": {
+    "category": "electronic_footprint",
+    "pad_count": 11,
+    "length": 13.97,
+    "width": 6.99
+  },
+  "xbee_20_tht": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "xbee_and_xbee_pro_37_smd": {
+    "category": "electronic_footprint",
+    "pad_count": 74,
+    "length": 93.98,
+    "width": 46.99
+  },
+  "xbee_pro_20_tht": {
+    "category": "electronic_footprint",
+    "pad_count": 20,
+    "length": 25.4,
+    "width": 12.7
+  },
+  "xdfn_2_1x0.60mm": {
+    "category": "electronic_footprint",
+    "pad_count": 2,
+    "length": 3.0,
+    "width": 3.0
+  },
+  "zigbee_module_mrf24j40ma": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  },
+  "zigbee_module_mrf24j40md": {
+    "category": "electronic_footprint",
+    "pad_count": 12,
+    "length": 15.24,
+    "width": 7.62
+  }
+}
