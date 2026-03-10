@@ -203,11 +203,8 @@ async def generate(req: GenerateRequest):
                 if not nx.is_directed_acyclic_graph(merged_graph_dag):
                     merged_graph_dag = nx.DiGraph(nx.topological_sort(merged_graph_dag))
                 
-                # Calculate bounding constraints and apply linear tray offsets
+                # Calculate bounding constraints and apply 2D Row-Wrapping tray offsets
                 from core.constraint_solver import ConstraintSolver
-                
-                total_grid_x = 0
-                max_grid_y = 1
                 
                 # First pass: compute footprint sizes
                 component_footprints = []
@@ -216,7 +213,6 @@ async def generate(req: GenerateRequest):
                         continue
                     
                     params = component_library.get(comp.id, {})
-                    # Approximate pitch based on component params, fallback to 15mm
                     pitch = params.get("pitch", params.get("diameter", 15.0) + 4.0)
                     grid_w, grid_l = ConstraintSolver.compute_grid_dimensions(comp.count, pitch)
                     
@@ -232,41 +228,58 @@ async def generate(req: GenerateRequest):
                         "grid_l": grid_l,
                         "params": params
                     })
-                    total_grid_x += grid_w
-                    max_grid_y = max(max_grid_y, grid_l)
                 
-                # Use LLM layout bounds if they provided enough space natively, else expand to securely fit the tray logic
-                final_grid_x = max(config.grid_x, total_grid_x)
-                final_grid_y = max(config.grid_y, max_grid_y)
-                
-                current_grid_offset = 0
                 gridfinity_unit = 42.0
+                max_grid_x_per_row = max(config.grid_x, 4) # Wrap down automatically at 4 slots
                 
-                # Second pass: inject layout parameters
+                current_col = 0
+                current_row = 0
+                row_max_grid_y = 0
+                
+                layout_placements = []
+                
+                # 2D Grid Row Allocation Map
                 for fp in component_footprints:
-                    comp = fp["comp"]
+                    if current_col + fp["grid_w"] > max_grid_x_per_row and current_col > 0:
+                        current_row += row_max_grid_y
+                        current_col = 0
+                        row_max_grid_y = 0
+                        
+                    layout_placements.append({
+                        "fp": fp,
+                        "col": current_col,
+                        "row": current_row
+                    })
                     
-                    # We want to center the component inside its allocated grid_w block.
-                    # Start of tray X in coordinates = - (final_grid_x * 42.0) / 2
-                    tray_start_x = -(final_grid_x * gridfinity_unit) / 2.0
+                    current_col += fp["grid_w"]
+                    row_max_grid_y = max(row_max_grid_y, fp["grid_l"])
+                
+                final_grid_x = max(config.grid_x, max((p["col"] + p["fp"]["grid_w"]) for p in layout_placements) if layout_placements else 1)
+                final_grid_y = max(config.grid_y, max((p["row"] + p["fp"]["grid_l"]) for p in layout_placements) if layout_placements else 1)
+                
+                # Translate (col, row) directly to Gridfinity absolute center origins for the master tray solid
+                base_start_x = - (final_grid_x * gridfinity_unit) / 2.0
+                base_start_y = (final_grid_y * gridfinity_unit) / 2.0
+                
+                for p in layout_placements:
+                    comp = p["fp"]["comp"]
+                    comp_w = p["fp"]["grid_w"]
+                    comp_l = p["fp"]["grid_l"]
                     
-                    # Center of the allocated block
-                    block_center_x = tray_start_x + (current_grid_offset + fp["grid_w"] / 2.0) * gridfinity_unit
-                    
-                    # Y offset is 0 to center it along the Y axis
-                    offset_y = 0.0
+                    block_center_x = base_start_x + (p["col"] + comp_w / 2.0) * gridfinity_unit
+                    block_center_y = base_start_y - (p["row"] + comp_l / 2.0) * gridfinity_unit
                     
                     for node in component_node_map[comp.id]:
                         setattr(cadengine, f"{node}_params", {
-                            **fp["params"],
+                            **p["fp"]["params"],
                             "count": comp.count,
+                            "comp_grid_x": comp_w,
+                            "comp_grid_y": comp_l,
                             "grid_x": final_grid_x,
                             "grid_y": final_grid_y,
                             "offset_x": block_center_x,
-                            "offset_y": offset_y
+                            "offset_y": block_center_y
                         })
-                    
-                    current_grid_offset += fp["grid_w"]
                 
                 # Ensure gridfinity_base executes first inherently by setting attributes on the base plate
                 if not hasattr(cadengine, "gridfinity_base_params"):

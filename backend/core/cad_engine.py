@@ -74,17 +74,23 @@ class CadEngine:
         if self.solid is None:
             self.gridfinity_base(**kwargs)
             
+        comp_grid_x = kwargs.get("comp_grid_x", self.grid_x)
+        comp_grid_y = kwargs.get("comp_grid_y", self.grid_y)
+        offset_x = kwargs.get("offset_x", 0.0)
+        offset_y = kwargs.get("offset_y", 0.0)
+        
         # Optional: apply angled slope if requested in kwargs, default 15
         angle = kwargs.get("tilt", 15.0)
-        outer_w = self.grid_x * 42.0 - 0.5
-        outer_l = self.grid_y * 42.0 - 0.5
+        outer_w = comp_grid_x * 42.0
+        outer_l = comp_grid_y * 42.0
         tot_h = self.grid_z * self.HEIGHT_UNIT
         
         cutter = (
             cq.Workplane("XY")
             .workplane(offset=self.BASE_HEIGHT + tot_h) 
+            .center(offset_x, offset_y)
             .transformed(rotate=(-angle, 0, 0))
-            .rect(outer_w * 3, outer_l * 3)
+            .rect(outer_w + 1.0, outer_l + 1.0)
             .extrude(tot_h + 20)
         )
         self.solid = self.solid.cut(cutter)
@@ -94,9 +100,6 @@ class CadEngine:
         body_size = kwargs.get("body", 14.0)
         
         rows, cols, start_x, start_y = ConstraintSolver.calculate_array_bounds(count, pitch)
-        
-        offset_x = kwargs.get("offset_x", 0.0)
-        offset_y = kwargs.get("offset_y", 0.0)
         
         pts = []
         placed = 0

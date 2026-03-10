@@ -55,8 +55,6 @@ print(f"Topological Execution Order: {list(nx.topological_sort(merged_graph_dag)
 
 from core.constraint_solver import ConstraintSolver
 
-total_grid_x = 0
-max_grid_y = 1
 component_footprints = []
 
 for comp in config.components:
@@ -69,31 +67,57 @@ for comp in config.components:
     component_footprints.append({
         "comp": comp, "grid_w": grid_w, "grid_l": grid_l, "params": params
     })
-    total_grid_x += grid_w
-    max_grid_y = max(max_grid_y, grid_l)
 
-final_grid_x = max(config.grid_x, total_grid_x)
-final_grid_y = max(config.grid_y, max_grid_y)
-
-current_grid_offset = 0
 gridfinity_unit = 42.0
+max_grid_x_per_row = max(config.grid_x, 4)
+
+current_col = 0
+current_row = 0
+row_max_grid_y = 0
+
+layout_placements = []
+
+for fp in component_footprints:
+    if current_col + fp["grid_w"] > max_grid_x_per_row and current_col > 0:
+        current_row += row_max_grid_y
+        current_col = 0
+        row_max_grid_y = 0
+        
+    layout_placements.append({
+        "fp": fp,
+        "col": current_col,
+        "row": current_row
+    })
+    
+    current_col += fp["grid_w"]
+    row_max_grid_y = max(row_max_grid_y, fp["grid_l"])
+
+final_grid_x = max(config.grid_x, max((p["col"] + p["fp"]["grid_w"]) for p in layout_placements) if layout_placements else 1)
+final_grid_y = max(config.grid_y, max((p["row"] + p["fp"]["grid_l"]) for p in layout_placements) if layout_placements else 1)
+
+base_start_x = - (final_grid_x * gridfinity_unit) / 2.0
+base_start_y = (final_grid_y * gridfinity_unit) / 2.0
 
 # Inject parameters
-for fp in component_footprints:
-    comp = fp["comp"]
-    tray_start_x = -(final_grid_x * gridfinity_unit) / 2.0
-    block_center_x = tray_start_x + (current_grid_offset + fp["grid_w"] / 2.0) * gridfinity_unit
+for p in layout_placements:
+    comp = p["fp"]["comp"]
+    comp_w = p["fp"]["grid_w"]
+    comp_l = p["fp"]["grid_l"]
+    
+    block_center_x = base_start_x + (p["col"] + comp_w / 2.0) * gridfinity_unit
+    block_center_y = base_start_y - (p["row"] + comp_l / 2.0) * gridfinity_unit
     
     for node in component_node_map[comp.id]:
         setattr(cadengine, f"{node}_params", {
-            **fp["params"],
+            **p["fp"]["params"],
             "count": comp.count,
+            "comp_grid_x": comp_w,
+            "comp_grid_y": comp_l,
             "grid_x": final_grid_x,
             "grid_y": final_grid_y,
             "offset_x": block_center_x,
-            "offset_y": 0.0
+            "offset_y": block_center_y
         })
-    current_grid_offset += fp["grid_w"]
 
 setattr(cadengine, "gridfinity_base_params", {"grid_x": final_grid_x, "grid_y": final_grid_y, "grid_z": config.grid_z})
 

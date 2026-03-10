@@ -1,0 +1,50 @@
+{
+  "prompt": "Build a Raspberry Pi tray with 4 SD card slots and 12 test tube holders",
+  "components": [
+    {
+      "id": "sd_card",
+      "count": 4
+    },
+    {
+      "id": "test_tube_rack_16mm",
+      "count": 12
+    }
+  ],
+  "component": "sd_card",
+  "count": 4,
+  "template": "basic_storage_bin",
+  "feature_graph": [
+    {
+      "feature": "gridfinity_base",
+      "params": {
+        "count": 12,
+        "grid_x": 12,
+        "grid_y": 4,
+        "offset_x": -189.0,
+        "offset_y": 0.0
+      }
+    },
+    {
+      "feature": "mx_switch_tester",
+      "params": {
+        "count": 12,
+        "grid_x": 12,
+        "grid_y": 4,
+        "offset_x": -189.0,
+        "offset_y": 0.0
+      }
+    },
+    {
+      "feature": "test_tube_rack_16mm",
+      "params": {
+        "count": 12,
+        "grid_x": 12,
+        "grid_y": 4,
+        "offset_x": -189.0,
+        "offset_y": 0.0
+      }
+    }
+  ],
+  "status": "valid",
+  "timestamp": "2026-03-10T01-42-23-954622"
+}
