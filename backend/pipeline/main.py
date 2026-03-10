@@ -138,6 +138,7 @@ async def generate(req: GenerateRequest):
             item_count=extracted_components[0].count if extracted_components else getattr(ar, "item_count", None),
             component_id=extracted_components[0].id if extracted_components else getattr(ar, "component_id", None)
         )
+        logger.info(f"LLM extracted components: {[c.model_dump() for c in config.components]}")
         logger.info(f"Config: {config.grid_x}x{config.grid_y}x{config.grid_z}, Template: {config.template_name}, Components: {len(config.components)}")
 
         # Step 2: Guardrail validation
@@ -158,13 +159,28 @@ async def generate(req: GenerateRequest):
         # Step 3: Multi-Feature Graph Composition & Generation
         if len(config.components) > 1:
             logger.info("Multiple components detected. Routing to GraphFeatureComposer for unified topological synthesis.")
-            subgraphs = []
-            for comp in config.components:
-                # Query the recommender database for known parametric loops for each hardware id
-                sg = graph_recommender.suggest_template(comp.id.split("_"))
-                if len(sg.nodes) > 0:
-                    subgraphs.append(sg)
             
+            # Load engineering library to inject physical dimensions into the execution parameters
+            import json
+            lib_path = os.path.join(os.path.dirname(__file__), "..", "hardware_library", "engineering_library.json")
+            with open(lib_path, "r", encoding="utf-8") as f:
+                component_library = json.load(f)
+
+            subgraphs = []
+            valid_components = []
+            for comp in config.components:
+                # Query the recommender database explicitly by the exact component_id
+                sg = graph_recommender.suggest_template([comp.id])
+                if sg is not None and len(sg.nodes) > 0:
+                    subgraphs.append(sg)
+                    valid_components.append(comp)
+            
+            # Attach offline parameters precisely to the CadQuery primitive nodes
+            for comp, sg in zip(valid_components, subgraphs):
+                for node in sg.nodes:
+                    params = component_library.get(comp.id, {})
+                    setattr(graph_composer.cadengine, f"{node}_params", {**params, "count": comp.count})
+
             global_config = {"grid_x": config.grid_x, "grid_y": config.grid_y}
             executed_nodes, composed_graph = graph_composer.compose_from_prompts(subgraphs, global_config)
             logger.info(f"Graph Composer executed features: {executed_nodes}")

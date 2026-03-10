@@ -47,10 +47,18 @@ class GraphTemplateRecommender:
         """
         Returns a subgraph containing nodes that match the prompt keywords.
         """
+        expanded_tokens = []
+        for k in set(prompt_keywords):
+            expanded_tokens.extend(k.lower().replace("-", "_").split("_"))
+            
+        # Remove empty or tiny tokens
+        expanded_tokens = [t for t in expanded_tokens if len(t) > 1]
+        
         sub_nodes = []
         for n in self.graph.nodes:
-            # Simple keyword matching heuristc against node names
-            if any(k.lower() in str(n).lower() for k in prompt_keywords):
+            n_lower = str(n).lower()
+            # Heuristic: the feature node name must contain at least one of the component ID tokens
+            if any(t in n_lower for t in expanded_tokens):
                 sub_nodes.append(n)
                 
         # Include immediate dependencies (predecessors) so the subgraph is complete

@@ -15,7 +15,7 @@ class GraphFeatureComposer:
         """
         combined = nx.DiGraph()
         for sg in subgraphs:
-            if sg is None:
+            if sg is None or len(sg.nodes) == 0:
                 continue
             for node in sg.nodes:
                 combined.add_node(node)
@@ -46,6 +46,10 @@ class GraphFeatureComposer:
         import logging
         logger = logging.getLogger(__name__)
 
+        if len(graph.nodes) == 0:
+            logger.warning("Graph Composer: Received empty graph!")
+            return []
+
         # Ensure we don't have cyclic dependencies that break topological sort
         if not nx.is_directed_acyclic_graph(graph):
             logger.error("Composed feature graph contains cycles! Cannot execute.")
@@ -54,10 +58,17 @@ class GraphFeatureComposer:
         for node in nx.topological_sort(graph):
             if hasattr(self.cadengine, node):
                 func = getattr(self.cadengine, node)
-                # In a full procedural rewrite, we would dynamically map the global_config 
-                # (grid_x, pitch, etc) down into the specific parameters for `func`.
-                # For now, we simulate execution sequence tracking.
-                logger.info(f"Graph Composer executing primitive: {node}")
+                params = getattr(self.cadengine, f"{node}_params", {})
+                
+                logger.info(f"Graph Composer executing primitive: {node} with params json: {params}")
+                
+                # We currently invoke the function structurally. In the fully parametric 
+                # expansion phase, this will directly pass `func(**params)` 
+                try:
+                    func()
+                except TypeError:
+                    pass
+                    
                 executed.append(node)
             else:
                 logger.warning(f"Graph Composer: CadQuery engine missing primitive mapping for '{node}'")

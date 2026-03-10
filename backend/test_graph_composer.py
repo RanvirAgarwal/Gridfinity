@@ -21,12 +21,12 @@ recommender = GraphTemplateRecommender(cadquery_engine=cadengine)
 print(f"Built global feature graph with {len(recommender.graph.nodes)} nodes and {len(recommender.graph.edges)} edges.")
 
 # 2. Suggest templates
-print("\nSuggestion 1: mx switch")
-sg1 = recommender.suggest_template(["mx", "switch"])
+print("\nSuggestion 1: mx_switch")
+sg1 = recommender.suggest_template(["mx_switch"])
 print("Nodes matched:", sg1.nodes)
 
-print("\nSuggestion 2: test tube")
-sg2 = recommender.suggest_template(["test", "tube"])
+print("\nSuggestion 2: test_tube_16mm")
+sg2 = recommender.suggest_template(["test_tube_16mm"])
 print("Nodes matched:", sg2.nodes)
 
 # 3. Compose and execute
