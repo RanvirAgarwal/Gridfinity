@@ -1,0 +1,21 @@
+{
+  "prompt": "Metric screw organizer for M3 and M5 socket heads",
+  "component": "m5",
+  "count": 2,
+  "template": "metric_screw_organizer",
+  "feature_graph": [
+    {
+      "feature": "gridfinity_base",
+      "params": {
+        "grid_x": 2,
+        "grid_y": 2
+      }
+    },
+    {
+      "feature": "metric_screw_organizer",
+      "params": {}
+    }
+  ],
+  "status": "valid",
+  "timestamp": "2026-03-10T00-40-18-566912"
+}
