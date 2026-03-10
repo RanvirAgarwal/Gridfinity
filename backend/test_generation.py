@@ -7,6 +7,7 @@ sys.path.insert(0, os.getcwd())
 
 from core.schemas import BinConfig
 from core.cadquery_engine import _cq_build_bin, generate_stl
+from core.learning_engine import LearningEngine
 
 # Simulate the configuration for a test tube rack
 config = BinConfig(
@@ -32,6 +33,23 @@ try:
     cq.exporters.export(model, tmp_path, "STL")
     print(f"SUCCESS: STL exported to {tmp_path}")
     os.remove(tmp_path)
+    
+    # Simulate Learning Engine recipe tracking
+    recipe = {
+        "prompt": "simulated test run",
+        "component": config.component_id,
+        "count": config.item_count,
+        "template": config.template_name,
+        "feature_graph": [
+            {"feature": "gridfinity_base", "params": {"grid_x": config.grid_x, "grid_y": config.grid_y}},
+            {"feature": config.template_name, "params": {}}
+        ],
+        "status": "valid"
+    }
+    le = LearningEngine()
+    le.record_generation(recipe)
+    print("SUCCESS: Feature graph serialized to learning_recipes/")
+    
     
 except Exception as e:
     print(f"\nGENERATION ERROR: {e}")

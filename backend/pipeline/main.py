@@ -25,6 +25,10 @@ from core.cadquery_engine import generate_stl, generate_glb
 from core.guardrails import validate_config
 from pipeline.export import save_stl, save_glb, GENERATED_DIR
 from ai import openrouter_engine
+from core.learning_engine import LearningEngine
+
+# Initialize the self-improving CAD engine globally
+learning_engine = LearningEngine()
 
 # ── Logging ──────────────────────────────────────────────────────────────────
 
@@ -146,6 +150,26 @@ async def generate(req: GenerateRequest):
         # Step 4: Save & return URLs
         stl_filename = save_stl(stl_bytes)
         glb_filename = save_glb(glb_bytes)
+
+        # Step 5: Record Recipe in Learning Engine for organic template discovery
+        recipe = {
+            "prompt": req.prompt,
+            "component": config.component_id or "generic_component",
+            "count": config.item_count,
+            "template": config.template_name,
+            "feature_graph": [
+                {"feature": "gridfinity_base", "params": {"grid_x": config.grid_x, "grid_y": config.grid_y}},
+                {"feature": config.template_name, "params": {}}
+            ],
+            "status": "valid"
+        }
+        
+        try:
+            learning_engine.record_generation(recipe)
+            # Evaluate pattern thresholds on every 5 valid prompts transparently
+            learning_engine.update_templates(min_occurrences=5)
+        except Exception as le:
+            logger.error(f"Learning Engine encountered a non-fatal tracking error: {le}")
 
         return GenerateResponse(
             success=True,

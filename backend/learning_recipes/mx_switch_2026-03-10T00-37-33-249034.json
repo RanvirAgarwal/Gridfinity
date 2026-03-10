@@ -1,0 +1,21 @@
+{
+  "prompt": "Make an organizer for 16 mx switches",
+  "component": "mx_switch",
+  "count": 16,
+  "template": "mx_switch_tester",
+  "feature_graph": [
+    {
+      "feature": "gridfinity_base",
+      "params": {
+        "grid_x": 4,
+        "grid_y": 4
+      }
+    },
+    {
+      "feature": "mx_switch_tester",
+      "params": {}
+    }
+  ],
+  "status": "valid",
+  "timestamp": "2026-03-10T00-37-33-249034"
+}

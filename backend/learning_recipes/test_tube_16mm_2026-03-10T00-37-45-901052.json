@@ -1,0 +1,21 @@
+{
+  "prompt": "simulated test run",
+  "component": "test_tube_16mm",
+  "count": 16,
+  "template": "test_tube_rack_16mm",
+  "feature_graph": [
+    {
+      "feature": "gridfinity_base",
+      "params": {
+        "grid_x": 2,
+        "grid_y": 3
+      }
+    },
+    {
+      "feature": "test_tube_rack_16mm",
+      "params": {}
+    }
+  ],
+  "status": "valid",
+  "timestamp": "2026-03-10T00-37-45-901052"
+}
