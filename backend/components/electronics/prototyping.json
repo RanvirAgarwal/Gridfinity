@@ -1,0 +1,25 @@
+{
+    "breadboard_half": {
+        "category": "electronics",
+        "length": 83.0,
+        "width": 55.0,
+        "height": 9.0
+    },
+    "breadboard_full": {
+        "category": "electronics",
+        "length": 165.0,
+        "width": 55.0,
+        "height": 9.0
+    },
+    "resistor_quarter_watt": {
+        "category": "electronics",
+        "body_length": 6.3,
+        "body_diameter": 2.5,
+        "lead_spacing": 7.5
+    },
+    "led_5mm": {
+        "category": "electronics",
+        "diameter": 5.0,
+        "lead_spacing": 2.54
+    }
+}

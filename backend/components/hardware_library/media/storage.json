@@ -1,0 +1,24 @@
+{
+    "sd_card_standard": {
+        "category": "media",
+        "width": 24.0,
+        "depth": 32.0,
+        "thickness": 2.1
+    },
+    "micro_sd_card": {
+        "category": "media",
+        "width": 11.0,
+        "depth": 15.0,
+        "thickness": 1.0
+    },
+    "battery_aa": {
+        "category": "power",
+        "diameter": 14.5,
+        "length": 50.5
+    },
+    "battery_aaa": {
+        "category": "power",
+        "diameter": 10.5,
+        "length": 44.5
+    }
+}

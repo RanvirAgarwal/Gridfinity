@@ -1,0 +1,15 @@
+{
+    "cherry_mx_switch": {
+        "category": "keyboard",
+        "body_width": 14.0,
+        "body_length": 14.0,
+        "plate_thickness": 1.5,
+        "pin_spacing": 5.0,
+        "mount_hole": 4.0
+    },
+    "cherry_stabilizer_2u": {
+        "category": "keyboard",
+        "width": 23.8,
+        "length": 14.0
+    }
+}

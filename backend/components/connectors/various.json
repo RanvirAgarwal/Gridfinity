@@ -1,0 +1,24 @@
+{
+    "xt60_male": {
+        "category": "connector",
+        "length": 15.5,
+        "width": 8.1,
+        "height": 16.0,
+        "panel_cutout": {
+            "x": 15.8,
+            "y": 8.4
+        }
+    },
+    "dupont_header_1x4": {
+        "category": "connector",
+        "length": 10.16,
+        "width": 2.54,
+        "height": 8.5
+    },
+    "usb_c_female": {
+        "category": "connector",
+        "width": 8.95,
+        "height": 3.16,
+        "shell_depth": 7.35
+    }
+}

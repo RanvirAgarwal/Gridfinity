@@ -1,0 +1,27 @@
+{
+    "test_tube_10mm": {
+        "category": "lab_equipment",
+        "diameter": 10.0,
+        "length": 75.0,
+        "clearance": 0.5
+    },
+    "test_tube_16mm": {
+        "category": "lab_equipment",
+        "diameter": 16.0,
+        "length": 150.0,
+        "clearance": 0.5
+    },
+    "microcentrifuge_1_5ml": {
+        "category": "lab_equipment",
+        "diameter": 11.0,
+        "top_diameter": 13.0,
+        "length": 40.0
+    },
+    "microscope_slide_standard": {
+        "category": "lab_equipment",
+        "width": 25.0,
+        "length": 75.0,
+        "thickness": 1.0,
+        "clearance": 0.2
+    }
+}

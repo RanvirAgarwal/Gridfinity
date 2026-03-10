@@ -1,0 +1,101 @@
+{
+  "m2_socket_head_cap": {
+    "category": "fastener",
+    "family": "metric_socket_cap_screw",
+    "diameter": 2,
+    "pitch": 0.4,
+    "head_diameter": 3.8,
+    "head_height": 2.0,
+    "hex_size": 1.5,
+    "clearance_hole": 2.3,
+    "tap_hole": 1.6
+  },
+  "m2_5_socket_head_cap": {
+    "category": "fastener",
+    "family": "metric_socket_cap_screw",
+    "diameter": 2.5,
+    "pitch": 0.45,
+    "head_diameter": 4.5,
+    "head_height": 2.5,
+    "hex_size": 2.0,
+    "clearance_hole": 2.8,
+    "tap_hole": 2.05
+  },
+  "m3_socket_head_cap": {
+    "category": "fastener",
+    "family": "metric_socket_cap_screw",
+    "diameter": 3,
+    "pitch": 0.5,
+    "head_diameter": 5.5,
+    "head_height": 3.0,
+    "hex_size": 2.5,
+    "clearance_hole": 3.3,
+    "tap_hole": 2.5
+  },
+  "m4_socket_head_cap": {
+    "category": "fastener",
+    "family": "metric_socket_cap_screw",
+    "diameter": 4,
+    "pitch": 0.7,
+    "head_diameter": 7.0,
+    "head_height": 4.0,
+    "hex_size": 3.0,
+    "clearance_hole": 4.3,
+    "tap_hole": 3.3
+  },
+  "m5_socket_head_cap": {
+    "category": "fastener",
+    "family": "metric_socket_cap_screw",
+    "diameter": 5,
+    "pitch": 0.8,
+    "head_diameter": 8.5,
+    "head_height": 5.0,
+    "hex_size": 4.0,
+    "clearance_hole": 5.3,
+    "tap_hole": 4.2
+  },
+  "m6_socket_head_cap": {
+    "category": "fastener",
+    "family": "metric_socket_cap_screw",
+    "diameter": 6,
+    "pitch": 1.0,
+    "head_diameter": 10.0,
+    "head_height": 6.0,
+    "hex_size": 5.0,
+    "clearance_hole": 6.3,
+    "tap_hole": 5.0
+  },
+  "m8_socket_head_cap": {
+    "category": "fastener",
+    "family": "metric_socket_cap_screw",
+    "diameter": 8,
+    "pitch": 1.25,
+    "head_diameter": 13.0,
+    "head_height": 8.0,
+    "hex_size": 6.0,
+    "clearance_hole": 8.3,
+    "tap_hole": 6.75
+  },
+  "m10_socket_head_cap": {
+    "category": "fastener",
+    "family": "metric_socket_cap_screw",
+    "diameter": 10,
+    "pitch": 1.5,
+    "head_diameter": 16.0,
+    "head_height": 10.0,
+    "hex_size": 8.0,
+    "clearance_hole": 10.3,
+    "tap_hole": 8.5
+  },
+  "m12_socket_head_cap": {
+    "category": "fastener",
+    "family": "metric_socket_cap_screw",
+    "diameter": 12,
+    "pitch": 1.75,
+    "head_diameter": 18.0,
+    "head_height": 12.0,
+    "hex_size": 10.0,
+    "clearance_hole": 12.3,
+    "tap_hole": 10.25
+  }
+}

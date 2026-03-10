@@ -1,0 +1,65 @@
+{
+    "arduino_uno": {
+        "category": "microcontroller",
+        "length": 68.6,
+        "width": 53.4,
+        "thickness": 1.6,
+        "mount_holes": [
+            {
+                "x": 14.0,
+                "y": 2.5,
+                "diameter": 3.2
+            },
+            {
+                "x": 66.0,
+                "y": 7.5,
+                "diameter": 3.2
+            },
+            {
+                "x": 66.0,
+                "y": 35.5,
+                "diameter": 3.2
+            },
+            {
+                "x": 15.3,
+                "y": 50.8,
+                "diameter": 3.2
+            }
+        ]
+    },
+    "esp32_devkit": {
+        "category": "microcontroller",
+        "length": 51.0,
+        "width": 28.0,
+        "thickness": 1.6,
+        "pin_pitch": 2.54
+    },
+    "raspberry_pi_4": {
+        "category": "microcontroller",
+        "length": 85.0,
+        "width": 56.0,
+        "thickness": 1.6,
+        "mount_holes": [
+            {
+                "x": 3.5,
+                "y": 3.5,
+                "diameter": 2.75
+            },
+            {
+                "x": 61.5,
+                "y": 3.5,
+                "diameter": 2.75
+            },
+            {
+                "x": 61.5,
+                "y": 52.5,
+                "diameter": 2.75
+            },
+            {
+                "x": 3.5,
+                "y": 52.5,
+                "diameter": 2.75
+            }
+        ]
+    }
+}

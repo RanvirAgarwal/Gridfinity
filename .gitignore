@@ -1,0 +1,53 @@
+# Node
+node_modules/
+.next/
+out/
+build/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+venv/
+venv311/
+env/
+ENV/
+.env
+
+# OpenCASCADE/CadQuery generated
+pipeline/generated/*.stl
+pipeline/generated/*.glb
+*.stl
+*.glb
+test_out.txt
+test_out.log
+out.log
+out2.log
+last_crash.txt
+
+# OS
+.DS_Store
+Thumbs.db
