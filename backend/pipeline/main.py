@@ -203,17 +203,74 @@ async def generate(req: GenerateRequest):
                 if not nx.is_directed_acyclic_graph(merged_graph_dag):
                     merged_graph_dag = nx.DiGraph(nx.topological_sort(merged_graph_dag))
                 
-                # Inject parameters for each node natively
+                # Calculate bounding constraints and apply linear tray offsets
+                from core.constraint_solver import ConstraintSolver
+                
+                total_grid_x = 0
+                max_grid_y = 1
+                
+                # First pass: compute footprint sizes
+                component_footprints = []
                 for comp in config.components:
                     if comp.id not in component_node_map:
                         continue
+                    
+                    params = component_library.get(comp.id, {})
+                    # Approximate pitch based on component params, fallback to 15mm
+                    pitch = params.get("pitch", params.get("diameter", 15.0) + 4.0)
+                    grid_w, grid_l = ConstraintSolver.compute_grid_dimensions(comp.count, pitch)
+                    
+                    # Override footprint manually for known massive parts
+                    if "arduino" in comp.id:
+                        grid_w, grid_l = 2, 2
+                    if "raspberry" in comp.id:
+                        grid_w, grid_l = 2, 2
+                        
+                    component_footprints.append({
+                        "comp": comp,
+                        "grid_w": grid_w,
+                        "grid_l": grid_l,
+                        "params": params
+                    })
+                    total_grid_x += grid_w
+                    max_grid_y = max(max_grid_y, grid_l)
+                
+                # Use LLM layout bounds if they provided enough space natively, else expand to securely fit the tray logic
+                final_grid_x = max(config.grid_x, total_grid_x)
+                final_grid_y = max(config.grid_y, max_grid_y)
+                
+                current_grid_offset = 0
+                gridfinity_unit = 42.0
+                
+                # Second pass: inject layout parameters
+                for fp in component_footprints:
+                    comp = fp["comp"]
+                    
+                    # We want to center the component inside its allocated grid_w block.
+                    # Start of tray X in coordinates = - (final_grid_x * 42.0) / 2
+                    tray_start_x = -(final_grid_x * gridfinity_unit) / 2.0
+                    
+                    # Center of the allocated block
+                    block_center_x = tray_start_x + (current_grid_offset + fp["grid_w"] / 2.0) * gridfinity_unit
+                    
+                    # Y offset is 0 to center it along the Y axis
+                    offset_y = 0.0
+                    
                     for node in component_node_map[comp.id]:
-                        params = component_library.get(comp.id, {})
-                        setattr(cadengine, f"{node}_params", {**params, "count": comp.count, "grid_x": config.grid_x, "grid_y": config.grid_y})
+                        setattr(cadengine, f"{node}_params", {
+                            **fp["params"],
+                            "count": comp.count,
+                            "grid_x": final_grid_x,
+                            "grid_y": final_grid_y,
+                            "offset_x": block_center_x,
+                            "offset_y": offset_y
+                        })
+                    
+                    current_grid_offset += fp["grid_w"]
                 
                 # Ensure gridfinity_base executes first inherently by setting attributes on the base plate
                 if not hasattr(cadengine, "gridfinity_base_params"):
-                    setattr(cadengine, "gridfinity_base_params", {"grid_x": config.grid_x, "grid_y": config.grid_y, "grid_z": config.grid_z})
+                    setattr(cadengine, "gridfinity_base_params", {"grid_x": final_grid_x, "grid_y": final_grid_y, "grid_z": config.grid_z})
 
                 # Execute merged graph topologically with Hard Stops
                 for node in nx.topological_sort(merged_graph_dag):

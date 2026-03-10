@@ -51,12 +51,15 @@ class CadEngine:
         
         rows, cols, start_x, start_y = ConstraintSolver.calculate_array_bounds(count, pitch)
         
+        offset_x = kwargs.get("offset_x", 0.0)
+        offset_y = kwargs.get("offset_y", 0.0)
+        
         pts = []
         placed = 0
         for r in range(rows):
             for c in range(cols):
                 if placed >= count: break
-                pts.append((start_x + c * pitch, start_y - r * pitch))
+                pts.append((start_x + c * pitch + offset_x, start_y - r * pitch + offset_y))
                 placed += 1
                 
         hole_diam = ConstraintSolver.calculate_hole_diameter(diameter, is_press_fit=False)
@@ -92,13 +95,16 @@ class CadEngine:
         
         rows, cols, start_x, start_y = ConstraintSolver.calculate_array_bounds(count, pitch)
         
+        offset_x = kwargs.get("offset_x", 0.0)
+        offset_y = kwargs.get("offset_y", 0.0)
+        
         pts = []
         placed = 0
         for r in range(rows):
             for c in range(cols):
                 if placed >= count: break
-                # adjust z by the slope
-                pts.append((start_x + c * pitch, start_y - r * pitch))
+                # adjust z by the slope if needed, shift globally by offset
+                pts.append((start_x + c * pitch + offset_x, start_y - r * pitch + offset_y))
                 placed += 1
                 
         GeometryValidator.validate_points_in_bounds(pts, body_size / 2.0, self.grid_x, self.grid_y)
@@ -119,8 +125,8 @@ class CadEngine:
         ])
         
         # Center the Arduino footprint
-        offset_x = -34.3
-        offset_y = -26.7
+        offset_x = -34.3 + kwargs.get("offset_x", 0.0)
+        offset_y = -26.7 + kwargs.get("offset_y", 0.0)
         aligned_pts = [(p[0] + offset_x, p[1] + offset_y) for p in pts]
         
         standoffs = (
