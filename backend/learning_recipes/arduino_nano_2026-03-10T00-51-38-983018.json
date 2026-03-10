@@ -1,0 +1,21 @@
+{
+  "prompt": "Create a keyboard tester tray with 16 MX switches and space for a microcontroller (Arduino Nano)",
+  "component": "arduino_nano",
+  "count": 16,
+  "template": "mx_switch_tester",
+  "feature_graph": [
+    {
+      "feature": "gridfinity_base",
+      "params": {
+        "grid_x": 4,
+        "grid_y": 4
+      }
+    },
+    {
+      "feature": "mx_switch_tester",
+      "params": {}
+    }
+  ],
+  "status": "valid",
+  "timestamp": "2026-03-10T00-51-38-983018"
+}

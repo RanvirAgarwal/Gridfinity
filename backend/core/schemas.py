@@ -44,6 +44,15 @@ class Cutout(BaseModel):
     corner_radius: float = Field(default=1.5, description="Fillet radius for rectangular pockets")
 
 
+class ComponentRequest(BaseModel):
+    """
+    Requested hardware instance.
+    E.g. "arduino_nano", count 1; or "mx_switch", count 16.
+    """
+    id: str = Field(..., description="The specific ID from engineering_library.json")
+    count: int = Field(default=1, description="Exact number of items/slots requested")
+
+
 class BinConfig(BaseModel):
     """
     The structured 5-Layer configuration output by the LLM.
@@ -59,15 +68,15 @@ class BinConfig(BaseModel):
         description="The explicit predefined template to use for generation."
     )
     
-    item_count: Optional[int] = Field(
-        default=None,
-        description="Exact number of items/slots requested (e.g. 16 switches)"
+    # Component Intent Extractors
+    components: list[ComponentRequest] = Field(
+        default_factory=list,
+        description="List of required components and their quantities"
     )
     
-    component_id: Optional[str] = Field(
-        default=None,
-        description="The specific ID from engineering_library.json for dimensions"
-    )
+    # Backwards compatibility flags for rendering layer
+    item_count: Optional[int] = Field(default=None)
+    component_id: Optional[str] = Field(default=None)
     
     # Legacy fields kept for frontend compatibility but ignored by backend geometry engine
     structure: Optional[str] = Field(default="hollow_bin", description="Either 'solid_block' or 'hollow_bin'")

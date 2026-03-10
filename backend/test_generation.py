@@ -5,18 +5,19 @@ from pathlib import Path
 # Add current dir to path
 sys.path.insert(0, os.getcwd())
 
-from core.schemas import BinConfig
+from core.schemas import BinConfig, ComponentRequest
 from core.cadquery_engine import _cq_build_bin, generate_stl
 from core.learning_engine import LearningEngine
 
-# Simulate the configuration for a test tube rack
+# Simulate the configuration for a test tube rack and an MX switch
 config = BinConfig(
     grid_x=2,
     grid_y=3,
     grid_z=4,
     template_name="test_tube_rack_16mm",
-    item_count=16,
-    component_id="test_tube_16mm"
+    components=[
+        ComponentRequest(id="test_tube_16mm", count=16)
+    ]
 )
 
 try:

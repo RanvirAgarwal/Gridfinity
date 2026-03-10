@@ -1,0 +1,21 @@
+{
+  "prompt": "Test tube rack for 16mm vials with 10 slots",
+  "component": "generic_component",
+  "count": 10,
+  "template": "test_tube_rack_16mm",
+  "feature_graph": [
+    {
+      "feature": "gridfinity_base",
+      "params": {
+        "grid_x": 10,
+        "grid_y": 1
+      }
+    },
+    {
+      "feature": "test_tube_rack_16mm",
+      "params": {}
+    }
+  ],
+  "status": "valid",
+  "timestamp": "2026-03-10T00-47-50-671787"
+}

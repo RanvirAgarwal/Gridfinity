@@ -30,6 +30,7 @@ class AdvancedGenerateResponse(BaseModel):
     grid_y: Optional[int] = None
     base_height: Optional[int] = None
     template_name: Optional[str] = None
+    components: Optional[list] = None
     item_count: Optional[int] = None
     component_id: Optional[str] = None
     operations: Optional[list] = None
@@ -59,17 +60,18 @@ The ONLY allowed values for 'template_name' are:
 - "hex_mesh_sterilization_tray"
 
 If the user's request doesn't clearly match a specific template, fallback to "basic_storage_bin".
-If the user specifies an exact quantity of items (e.g. "16 switches", "10 test tubes", "hold 5 sd cards"), set 'item_count' to that integer.
-If the component exists in the COMPONENT LIBRARY DATA provided below, set 'component_id' to its exact name.
+If the user specifies hardware elements, you must extract ALL of them into the 'components' array.
+For each hardware component mentioned, if it exists in the COMPONENT LIBRARY DATA provided below, add an object with its exact 'id' and the requested 'count' (default to 1 if not specified).
 
 OUTPUT SPECIFICATION:
-You MUST output EXACTLY one JSON object containing ONLY grid_x, grid_y, template_name, item_count, and component_id.
+You MUST output EXACTLY one JSON object containing ONLY grid_x, grid_y, template_name, and components.
 {
   "grid_x": int,
   "grid_y": int,
   "template_name": str,
-  "item_count": int, // optional, omit if no quantity specified
-  "component_id": str // optional, omit if no matching component
+  "components": [
+    {"id": str, "count": int}
+  ] // Empty array if no components specified
 }
 """
 
@@ -153,6 +155,7 @@ async def generate_advanced(req: AdvancedGenerateRequest):
                 grid_y=data.get("grid_y", 1),
                 base_height=6,
                 template_name=data.get("template_name", "basic_storage_bin"),
+                components=data.get("components", []),
                 item_count=data.get("item_count"),
                 component_id=data.get("component_id"),
                 operations=[],
@@ -168,6 +171,7 @@ async def generate_advanced(req: AdvancedGenerateRequest):
                 grid_y=1,
                 base_height=6,
                 template_name="basic_storage_bin",
+                components=[],
                 item_count=None,
                 component_id=None,
                 operations=[{"type": "decode_error_fallback", "error": str(je)}],
@@ -185,6 +189,7 @@ async def generate_advanced(req: AdvancedGenerateRequest):
             grid_y=1,
             base_height=6,
             template_name="basic_storage_bin",
+            components=[],
             item_count=None,
             component_id=None,
             operations=[{"type": "connection_error_fallback", "error": str(e)}],
