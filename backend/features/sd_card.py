@@ -20,14 +20,13 @@ def add_sd_slots(tray: cq.Workplane, **kwargs) -> cq.Workplane:
         y = offset_y
         pts.append((x,y))
 
-    for p in pts:
-        tray = (
-            tray
-            .faces(">Z")
-            .workplane(centerOption="CenterOfMass")
-            .center(p[0], p[1])
-            .rect(width, height)
-            .cutBlind(-depth)
-        )
+    print(f"Executing SD Card Slots at points: {pts}")
+    
+    wp = tray.faces(">Z").workplane(centerOption="CenterOfMass")
+    tray = (
+        wp.pushPoints(pts)
+        .rect(width, height)
+        .cutBlind(-depth)
+    )
 
     return tray

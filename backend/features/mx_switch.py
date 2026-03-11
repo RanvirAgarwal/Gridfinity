@@ -49,5 +49,12 @@ def add_mx_switch_tester(tray: cq.Workplane, **kwargs) -> cq.Workplane:
             placed += 1
             
     GeometryValidator.validate_points_in_bounds(pts, body_size / 2.0, grid_x, grid_y)
-    tray = tray.faces(">Z").workplane(centerOption="CenterOfMass").pushPoints(pts).rect(body_size, body_size).cutBlind(-6.0)
+    print(f"Executing MX Switches at points: {pts}")
+    
+    wp = tray.faces(">Z").workplane(centerOption="CenterOfMass")
+    tray = (
+        wp.pushPoints(pts)
+        .rect(body_size, body_size)
+        .cutBlind(-6.0)
+    )
     return tray

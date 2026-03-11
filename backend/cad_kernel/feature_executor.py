@@ -26,6 +26,11 @@ class FeatureExecutor:
             if self.tray is None:
                 self.tray = feature_func(**params)
             else:
+                before_vol = self.tray.val().Volume()
                 self.tray = feature_func(self.tray, **params)
+                after_vol = self.tray.val().Volume()
+                
+                if abs(after_vol - before_vol) < 0.01:
+                    logger.warning(f"⚠ Feature {feature_name} produced no geometry volume change!")
                 
         return self.tray

@@ -9,9 +9,14 @@ def create_base_tray(**kwargs):
     grid_x = kwargs.get("grid_x", 1)
     grid_y = kwargs.get("grid_y", 1)
     grid_z = kwargs.get("grid_z", 3)
+    size_x = grid_x * 42.0
+    size_y = grid_y * 42.0
     
-    # Force single base profile block
-    base_plate = build_gridfinity_base(grid_x, grid_y)
-    tray = build_walls(base_plate, grid_x, grid_y, grid_z, is_solid=True, wall_thickness=2.0)
+    # 1 Unit height gridfinity
+    tray = (
+        cq.Workplane("XY")
+        .rect(size_x, size_y)
+        .extrude(7.0)
+    )
     
     return tray

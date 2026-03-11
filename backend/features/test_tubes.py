@@ -34,8 +34,14 @@ def add_test_tube_rack(tray: cq.Workplane, **kwargs) -> cq.Workplane:
     GeometryValidator.validate_points_in_bounds(pts, hole_diam / 2.0, grid_x, grid_y)
     
     radius = hole_diam / 2.0
-    depth = (grid_z * HEIGHT_UNIT) - 2.0
+    print(f"Executing Test Tube Holes at points: {pts}") # Debug explicit verification
     
-    # CUT into the single global tray
-    tray = tray.faces(">Z").workplane(centerOption="CenterOfMass").pushPoints(pts).circle(radius).cutBlind(-abs(depth))
+    # Failproof CUT logic natively evaluated along the CenterOfMass of the flat top face
+    wp = tray.faces(">Z").workplane(centerOption="CenterOfMass")
+    tray = (
+        wp.pushPoints(pts)
+        .circle(radius)
+        .cutThruAll()
+    )
+    
     return tray

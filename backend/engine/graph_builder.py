@@ -12,6 +12,7 @@ def build_graph(intent_dict, component_library, global_grid_x=1, global_grid_y=1
     recommender = GraphTemplateRecommender()
     
     components = intent_dict.get("components", [])
+    print(f"Graph Builder - Components detected: {components}")
     
     # Calculate geometric absolute bounding positions securely via 2D algorithm
     max_grid_x_per_row = max(global_grid_x, 4)
