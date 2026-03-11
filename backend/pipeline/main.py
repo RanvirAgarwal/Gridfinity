@@ -156,159 +156,76 @@ async def generate(req: GenerateRequest):
                 error="Configuration failed guardrail checks. See warnings.",
             )
 
-        # Step 3: Failproof Multi-Feature Graph Composition & Generation
+        # Step 3: Architecture-Level Feature Graph Generation
         stl_bytes = None
         glb_bytes = None
         recipe_feature_graph = []
         
         if len(config.components) >= 1:
-            logger.info("Routing components to Failproof Component Pipeline for topological synthesis.")
-            
-            # Load engineering library to inject physical dimensions into the execution parameters
-            import json, networkx as nx
-            from core.cad_engine import CadEngine
-            
-            lib_path = os.path.join(os.path.dirname(__file__), "..", "hardware_library", "engineering_library.json")
-            with open(lib_path, "r", encoding="utf-8") as f:
-                component_library = json.load(f)
-
-            subgraphs = []
-            component_node_map = {}
-            cadengine = CadEngine()
+            logger.info("Routing components to Feature Graph DAG Pipeline.")
             
             try:
-                for comp in config.components:
-                    # Explicit ID lookup first
-                    sg = graph_recommender.suggest_template([comp.id])
-                    
-                    # Fallback to token matching
-                    if not sg or len(sg.nodes) == 0:
-                        sg = graph_recommender.suggest_template(comp.id.replace("_", " ").split())
-                        
-                    if sg is not None and len(sg.nodes) > 0:
-                        subgraphs.append(sg)
-                        component_node_map[comp.id] = list(sg.nodes)
-                
-                if not subgraphs:
-                    raise RuntimeError("No valid subgraphs found for any components in the dataset.")
-                
-                # Merge subgraphs into one DAG
-                merged_graph = dict() 
-                merged_graph_dag = nx.DiGraph()
-                for sg in subgraphs:
-                    merged_graph_dag.add_nodes_from(sg.nodes)
-                    merged_graph_dag.add_edges_from(sg.edges)
-                
-                # Ensure DAG (remove cycles if any)
-                if not nx.is_directed_acyclic_graph(merged_graph_dag):
-                    merged_graph_dag = nx.DiGraph(nx.topological_sort(merged_graph_dag))
-                
-                # Calculate bounding constraints and apply 2D Row-Wrapping tray offsets
-                from core.constraint_solver import ConstraintSolver
-                
-                # First pass: compute footprint sizes
-                component_footprints = []
-                for comp in config.components:
-                    if comp.id not in component_node_map:
-                        continue
-                    
-                    params = component_library.get(comp.id, {})
-                    pitch = params.get("pitch", params.get("diameter", 15.0) + 4.0)
-                    grid_w, grid_l = ConstraintSolver.compute_grid_dimensions(comp.count, pitch)
-                    
-                    # Override footprint manually for known massive parts
-                    if "arduino" in comp.id:
-                        grid_w, grid_l = 2, 2
-                    if "raspberry" in comp.id:
-                        grid_w, grid_l = 2, 2
-                        
-                    component_footprints.append({
-                        "comp": comp,
-                        "grid_w": grid_w,
-                        "grid_l": grid_l,
-                        "params": params
-                    })
-                
-                gridfinity_unit = 42.0
-                max_grid_x_per_row = max(config.grid_x, 4) # Wrap down automatically at 4 slots
-                
-                current_col = 0
-                current_row = 0
-                row_max_grid_y = 0
-                
-                layout_placements = []
-                
-                # 2D Grid Row Allocation Map
-                for fp in component_footprints:
-                    if current_col + fp["grid_w"] > max_grid_x_per_row and current_col > 0:
-                        current_row += row_max_grid_y
-                        current_col = 0
-                        row_max_grid_y = 0
-                        
-                    layout_placements.append({
-                        "fp": fp,
-                        "col": current_col,
-                        "row": current_row
-                    })
-                    
-                    current_col += fp["grid_w"]
-                    row_max_grid_y = max(row_max_grid_y, fp["grid_l"])
-                
-                final_grid_x = max(config.grid_x, max((p["col"] + p["fp"]["grid_w"]) for p in layout_placements) if layout_placements else 1)
-                final_grid_y = max(config.grid_y, max((p["row"] + p["fp"]["grid_l"]) for p in layout_placements) if layout_placements else 1)
-                
-                # Translate (col, row) directly to Gridfinity absolute center origins for the master tray solid
-                base_start_x = - (final_grid_x * gridfinity_unit) / 2.0
-                base_start_y = (final_grid_y * gridfinity_unit) / 2.0
-                
-                for p in layout_placements:
-                    comp = p["fp"]["comp"]
-                    comp_w = p["fp"]["grid_w"]
-                    comp_l = p["fp"]["grid_l"]
-                    
-                    block_center_x = base_start_x + (p["col"] + comp_w / 2.0) * gridfinity_unit
-                    block_center_y = base_start_y - (p["row"] + comp_l / 2.0) * gridfinity_unit
-                    
-                    for node in component_node_map[comp.id]:
-                        setattr(cadengine, f"{node}_params", {
-                            **p["fp"]["params"],
-                            "count": comp.count,
-                            "comp_grid_x": comp_w,
-                            "comp_grid_y": comp_l,
-                            "grid_x": final_grid_x,
-                            "grid_y": final_grid_y,
-                            "offset_x": block_center_x,
-                            "offset_y": block_center_y
-                        })
-                
-                # Ensure gridfinity_base executes first inherently by setting attributes on the base plate
-                if not hasattr(cadengine, "gridfinity_base_params"):
-                    setattr(cadengine, "gridfinity_base_params", {"grid_x": final_grid_x, "grid_y": final_grid_y, "grid_z": config.grid_z})
+                import json
+                lib_path = os.path.join(os.path.dirname(__file__), "..", "hardware_library", "engineering_library.json")
+                with open(lib_path, "r", encoding="utf-8") as f:
+                    component_library = json.load(f)
 
-                # Execute merged graph topologically with Hard Stops
-                for node in nx.topological_sort(merged_graph_dag):
-                    func = getattr(cadengine, node, None)
-                    if func is None:
-                        raise ValueError(f"Missing CAD kernel primitive for node: {node}")
-                    
-                    params = getattr(cadengine, f"{node}_params", {})
-                    logger.info(f"Composer Engine invoking primitive: {node} ({params})")
-                    func(**params)
-                    
-                    # Optional: Explicit validations after each step can catch overlapping cut corruption early
-                    GeometryValidator.validate_manifold(cadengine.solid)
-                    
-                stl_bytes = cadengine.export_stl()
-                glb_bytes = cadengine.export_glb()
+                from engine.graph_builder import build_graph
+                from cad_kernel.feature_executor import FeatureExecutor
                 
-                # Track executed nodes correctly
+                # Format intent for the graph builder
+                intent = {"components": [c.model_dump() for c in config.components]}
+                
+                # 1. Build the Feature Graph
+                logger.info("Initializing Feature Graph DAG Execution")
+                graph = build_graph(intent, component_library, global_grid_x=config.grid_x, global_grid_y=config.grid_y, global_grid_z=config.grid_z)
+                
+                # 2. Execute via FeatureExecutor
+                executor = FeatureExecutor()
+                result_tray = executor.execute(graph)
+                
+                # Validate final mesh
+                if not GeometryValidator.validate_manifold(result_tray):
+                    raise ValueError("Topology is broken or disjoint.")
+                
+                import tempfile
+                import cadquery as cq
+                import os
+                
+                with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as tmp:
+                    tmp_path = tmp.name
+                
+                cq.exporters.export(result_tray, tmp_path, "STL")
+                with open(tmp_path, "rb") as f:
+                    stl_bytes = f.read()
+                os.remove(tmp_path)
+                
+                # GLB export
+                with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as tmp_stl:
+                    tmp_stl.write(stl_bytes)
+                    tmp_stl_path = tmp_stl.name
+                
+                import trimesh
+                with tempfile.NamedTemporaryFile(suffix=".glb", delete=False) as tmp_glb:
+                    tmp_glb_path = tmp_glb.name
+                
+                mesh = trimesh.load_mesh(tmp_stl_path, file_type="stl")
+                if hasattr(mesh, 'visual'):
+                    mesh.visual.vertex_colors = [128, 128, 128, 255]
+                mesh.export(tmp_glb_path, file_type="glb")
+                
+                with open(tmp_glb_path, "rb") as f:
+                    glb_bytes = f.read()
+                os.remove(tmp_stl_path)
+                os.remove(tmp_glb_path)
+                
                 recipe_feature_graph = [
-                    {"feature": n, "params": getattr(cadengine, f"{n}_params", {})} 
-                    for n in merged_graph_dag.nodes
+                    {"feature": n, "params": graph.graph.nodes[n]["params"]} 
+                    for n in graph.execution_order()
                 ]
-                
+
             except Exception as graph_err:
-                logger.error(f"Failproof topological execution crashed: {graph_err}. Falling back to default solid generator.")
+                logger.error(f"Feature Graph execution crashed: {graph_err}. Falling back to default solid generator.")
                 import traceback
                 traceback.print_exc()
                 

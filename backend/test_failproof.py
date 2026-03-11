@@ -2,137 +2,55 @@ import sys
 import os
 import json
 import networkx as nx
-from pathlib import Path
 
 sys.path.insert(0, os.getcwd())
 
 from core.schemas import BinConfig, ComponentRequest
-from core.cad_engine import CadEngine
-from core.graph_template_recommender import GraphTemplateRecommender
+from engine.graph_builder import build_graph
+from cad_kernel.feature_executor import FeatureExecutor
 
-print("Testing Failproof Multi-Component CadEngine Composition...\n")
+print("Testing Feature Graph CAD Kernel Execution...\n")
 
-config = BinConfig(
-    grid_x=3,
-    grid_y=3,
-    grid_z=3,
-    components=[
-        ComponentRequest(id="test_tube_16mm", count=4),
-        ComponentRequest(id="mx_switch", count=8)
+intent = {
+    "components": [
+        {"id": "test_tube_16mm", "count": 4},
+        {"id": "mx_switch", "count": 8},
+        {"id": "raspberry_pi", "count": 1},
+        {"id": "sd_card", "count": 4}
     ]
-)
-
-graph_recommender = GraphTemplateRecommender()
-cadengine = CadEngine()
+}
 
 lib_path = os.path.join(os.path.dirname(__file__), "hardware_library", "engineering_library.json")
 with open(lib_path, "r", encoding="utf-8") as f:
     component_library = json.load(f)
 
-subgraphs = []
-component_node_map = {}
+print(f"1. Building CAD DAG Feature Graph...")
+graph = build_graph(intent, component_library, global_grid_x=3, global_grid_y=3, global_grid_z=3)
 
-for comp in config.components:
-    sg = graph_recommender.suggest_template([comp.id])
-    if not sg or len(sg.nodes) == 0:
-        sg = graph_recommender.suggest_template(comp.id.replace("_", " ").split())
-        
-    if sg is not None and len(sg.nodes) > 0:
-        subgraphs.append(sg)
-        component_node_map[comp.id] = list(sg.nodes)
+print("Execution Order:")
+print(" -> " + " \n -> ".join(graph.execution_order()))
 
-print(f"Subgraphs matched: {len(subgraphs)}")
-
-merged_graph_dag = nx.DiGraph()
-for sg in subgraphs:
-    merged_graph_dag.add_nodes_from(sg.nodes)
-    merged_graph_dag.add_edges_from(sg.edges)
-
-if not nx.is_directed_acyclic_graph(merged_graph_dag):
-    merged_graph_dag = nx.DiGraph(nx.topological_sort(merged_graph_dag))
-
-print(f"Topological Execution Order: {list(nx.topological_sort(merged_graph_dag))}")
-
-from core.constraint_solver import ConstraintSolver
-
-component_footprints = []
-
-for comp in config.components:
-    if comp.id not in component_node_map:
-        continue
-    params = component_library.get(comp.id, {})
-    pitch = params.get("pitch", params.get("diameter", 15.0) + 4.0)
-    grid_w, grid_l = ConstraintSolver.compute_grid_dimensions(comp.count, pitch)
-    
-    component_footprints.append({
-        "comp": comp, "grid_w": grid_w, "grid_l": grid_l, "params": params
-    })
-
-gridfinity_unit = 42.0
-max_grid_x_per_row = max(config.grid_x, 4)
-
-current_col = 0
-current_row = 0
-row_max_grid_y = 0
-
-layout_placements = []
-
-for fp in component_footprints:
-    if current_col + fp["grid_w"] > max_grid_x_per_row and current_col > 0:
-        current_row += row_max_grid_y
-        current_col = 0
-        row_max_grid_y = 0
-        
-    layout_placements.append({
-        "fp": fp,
-        "col": current_col,
-        "row": current_row
-    })
-    
-    current_col += fp["grid_w"]
-    row_max_grid_y = max(row_max_grid_y, fp["grid_l"])
-
-final_grid_x = max(config.grid_x, max((p["col"] + p["fp"]["grid_w"]) for p in layout_placements) if layout_placements else 1)
-final_grid_y = max(config.grid_y, max((p["row"] + p["fp"]["grid_l"]) for p in layout_placements) if layout_placements else 1)
-
-base_start_x = - (final_grid_x * gridfinity_unit) / 2.0
-base_start_y = (final_grid_y * gridfinity_unit) / 2.0
-
-# Inject parameters
-for p in layout_placements:
-    comp = p["fp"]["comp"]
-    comp_w = p["fp"]["grid_w"]
-    comp_l = p["fp"]["grid_l"]
-    
-    block_center_x = base_start_x + (p["col"] + comp_w / 2.0) * gridfinity_unit
-    block_center_y = base_start_y - (p["row"] + comp_l / 2.0) * gridfinity_unit
-    
-    for node in component_node_map[comp.id]:
-        setattr(cadengine, f"{node}_params", {
-            **p["fp"]["params"],
-            "count": comp.count,
-            "comp_grid_x": comp_w,
-            "comp_grid_y": comp_l,
-            "grid_x": final_grid_x,
-            "grid_y": final_grid_y,
-            "offset_x": block_center_x,
-            "offset_y": block_center_y
-        })
-
-setattr(cadengine, "gridfinity_base_params", {"grid_x": final_grid_x, "grid_y": final_grid_y, "grid_z": config.grid_z})
+executor = FeatureExecutor()
 
 try:
-    for node in nx.topological_sort(merged_graph_dag):
-        func = getattr(cadengine, node, None)
-        if func is None:
-            raise ValueError(f"Missing CAD kernel primitive for node: {node}")
+    print(f"\n2. Executing Topological Kernel Sequences...")
+    result_tray = executor.execute(graph)
+    
+    print("\n3. Validating and Exporting Mesh...")
+    from core.geometry_validator import GeometryValidator
+    if not GeometryValidator.validate_manifold(result_tray):
+        raise ValueError("Non-manifold mesh topology generated!")
         
-        params = getattr(cadengine, f"{node}_params", {})
-        print(f" -> Executing {node} with params: {params}")
-        func(**params)
+    import tempfile
+    import cadquery as cq
+    with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as tmp:
+        tmp_path = tmp.name
         
-    stl = cadengine.export_stl()
-    print(f"\nSUCCESS! Generated STL size: {len(stl)} bytes.")
+    cq.exporters.export(result_tray, tmp_path, "STL")
+    size = os.path.getsize(tmp_path)
+    os.remove(tmp_path)
+    
+    print(f"\nSUCCESS! Generated highly sophisticated multi-part STL. Size: {size} bytes.")
 except Exception as e:
     import traceback
     traceback.print_exc()
